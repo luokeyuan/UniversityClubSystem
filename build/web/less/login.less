@@ -1,0 +1,208 @@
+body,div,input,button{
+	padding:0;
+	margin:0;
+}
+.mar_auto{
+	margin:0 auto;
+}
+@form_hg:40px;
+//针对chrome
+input:focus{
+	outline: none;
+}
+.btn-color{
+	background-color: #87D6B4;
+}
+//背景
+body{
+	background-color: #F1F1F1;
+}
+.header{
+	background: #1BBC9B;
+	border-bottom: 2px solid #fff;
+	.title{
+		width: 1240px;
+		height: 100px;
+		background-image: url(../images/title.png);
+		background-repeat: no-repeat;
+		.mar_auto;
+	}
+}
+.content{
+	width: 1240px;
+	height: 500px;
+	background-image: url(../images/pic.jpg);
+	background-size: 100% 100%;
+	.mar_auto;
+	padding-top: 50px;
+}
+
+.wrap{
+	position: relative;
+	margin-left:810px;
+}
+.login,.register{
+	width:400px;
+	.mar_auto;
+}
+//警告信息
+.msg{
+	display: block;
+	height: 16px;
+	line-height: 16px;
+	font-size: 12px;
+	color:#E94C4C;
+	i{
+		display: inline-block;
+		width: 16px;
+		height: 16px;
+		font-style: normal;
+		background-image: url(../images/i.png);
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		vertical-align: top;
+		margin-right: 5px;
+	}
+}
+//选择
+.nav{
+	width: 400px;
+	height: 50px;
+	.btnf{
+		height: 50px;
+		float: left;
+		line-height: 50px;
+		width: 78px;
+		text-align: center;
+		cursor: pointer;
+		color:#eee;
+	}
+	.log-btn{
+		.btn-color;
+	}
+}
+
+//登录表单
+.login{
+	padding:30px 0 30px 0;
+	position: absolute;
+	left: -15px;
+	border-top:2px solid #87D6B4;
+	.form{
+		width: 300px;
+		height: @form_hg;
+		line-height: @form_hg;
+		.mar_auto;
+		margin-top:10px;
+		margin-bottom: 30px;
+	}
+}
+.user input,.password input{
+	width: 250px;
+	height: @form_hg;
+	line-height: @form_hg;
+	border:none;
+	font-size: 16px;
+	float: right;
+	margin-right: 5px;
+	color:#666;
+}
+.user,.password{
+	border:1px solid #fff;
+	border-radius: 6px;
+	background: #fff;
+	border: 1px solid #C2C2C2;
+	position: relative;
+}
+.usertype{
+	width: 300px;
+	text-align: left;
+	font-size: 14px;
+	height: @form_hg - 15;
+	line-height: @form_hg - 15;
+	.mar_auto;
+	color:#444;
+}
+.btn input{
+	display: block;
+	width:300px;
+	height:@form_hg;
+	font-size: 18px;
+	border-radius: 6px;
+	border:none;
+	.btn-color;
+	color:#fff;
+	cursor: pointer;
+	&:hover{
+		background:#7FC4A7;
+	}
+}
+.user .icon{
+	background-image: url(../images/icon-use.png);
+}
+.password .icon{
+	background-image: url(../images/icon-pw.png);
+}
+.icon{
+	display: inline-block;
+	width:@form_hg - 20;
+	height: @form_hg - 20;
+	margin: 10px 0 10px 10px;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+#user-msg,#pwd-msg{
+	display: none;
+	position: absolute;
+	left: 55px;
+	top: 45px;
+}
+
+//注册表单
+.register{
+	padding-top: 30px;
+	position: absolute;
+	left: -15px;
+	border-top:2px solid #87D6B4;
+	display: none;
+	.form1{
+		height: @form_hg;
+		line-height: @form_hg;
+		width: 350px;
+		.mar_auto;
+		text-align: center;
+		margin-bottom: 30px;
+		color: #444;
+		position: relative;
+		input{
+			float: right;
+			height: @form_hg - 6;
+			line-height: @form_hg;
+			font-size: 16px;
+			width: 250px;
+			border:1px solid #C2C2C2;
+			border-radius: 0 6px 6px 0;
+			margin-top: 2px;
+		}
+		span{
+			color:#F25F48;
+		}
+	}
+	.btn{
+		width: 300px;
+		.mar_auto;
+		margin-top:30px;
+		margin-bottom: 30px;
+	}
+}
+#user-exist,#pwd-confirm{
+	position: absolute;
+	top: 42px;
+	left: 105px;
+	display: none;
+}
+
+//注册和登录表单背景透明
+.login,.register{
+	background:rgba(255, 255, 255, 0.4);
+}

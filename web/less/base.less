@@ -1,0 +1,113 @@
+body,div,h1,ul,li,h2,textarea,input,button,p,h5{
+	padding:0;
+	margin:0;
+}
+.mar_auto{
+	margin:0 auto;
+}
+input,textarea{
+	outline: none;
+}
+body{
+	font-family: "微软雅黑";
+}
+a{
+	font-family: "宋体";
+}
+@fz:16px;
+.border{
+	border:1px solid #EDFAF5;
+	border-radius: 3px;
+}
+//头部
+.header{
+	height: 80px;
+	background-color: #1BBC9B;
+}
+.nav{
+	width: 1200px;
+	height: 80px;
+	.mar_auto;
+	position: relative;
+	h1{
+		height: 80px;
+		line-height: 80px;
+		font-size: 42px;
+		color: #DFDFDF;
+		font-family: '宋体';
+	}
+	a{
+		font-size: @fz;
+		color: #ddd;
+		text-decoration: none;
+		margin-right: 10px;
+		&:hover{
+			color: #C81522;
+		}
+	}
+	.link{
+		display:block;
+		height:20px;
+		position: absolute;
+		right: 0;
+		bottom:5px;
+	}
+}
+
+
+//主体
+.wrap{
+	width: 1200px;
+	.mar_auto;
+	position: relative;
+	padding-top: 20px;
+}
+//第一列
+.info{
+	width: 200px;
+	background: #F2F2F2;
+	float: left;
+	margin-left: 4px;
+	.border;
+	.head{
+		width: 100px;
+		height: 100px;
+		background: #eee;
+		padding:4px;
+		margin: 5px 0 0 5px;
+	}
+	.username{
+		font-size: 18px;
+		font-family: "微软雅黑";
+		padding:0 5px;
+		display: inline-block;
+		width:77px;
+		height: 24px;
+		line-height: 24px;
+		color:#343636;
+		overflow: hidden;
+		text-overflow:ellipsis;
+	}
+}
+.alist{
+	list-style: none;
+	margin-top: 20px;
+	li{
+		height: 24px;
+		line-height: 24px;
+		padding:5px 0 5px 5px;
+		a{
+			font-size: @fz+4;
+			color: #343636;
+			text-decoration: none;
+		}
+	}
+}
+
+//第二列
+.content{
+	background: #F2F2F2;
+	margin-left: 220px;
+	margin-right: 10px;
+	.border;
+}
