@@ -5,23 +5,23 @@
  */
 package com.ucs.servlet;
 
+import com.ucs.jsp.register;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.ucs.jsp.register;
-import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author MR.l
  */
-public class changeinfoservlet extends HttpServlet {
+public class announcenotice extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,39 +41,20 @@ public class changeinfoservlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             register reg=new register();
             ResultSet rs=null;
-            String sex=request.getParameter("sex");
-            String school=request.getParameter("school");
-            String phone=request.getParameter("phone");
-            String email=request.getParameter("email");
-            String intro=request.getParameter("intro");
+            String clubname=request.getParameter("clubname");
+            String content=request.getParameter("content");
             HttpSession session = request.getSession(true);
+            String username=(String)session.getAttribute("username");
+            
             try {
                 reg.getConn();
-                String username=(String)session.getAttribute("username");
-                if(sex!=""){
-                    String sql="update register set sex='"+sex+"' where username='"+username+"'";
-                    reg.updateConn(sql);
-                }
-                if(school!=""){
-                    String sql="update register set school='"+school+"' where username='"+username+"'";
-                    reg.updateConn(sql);
-                }
-                if(phone!=""){
-                    String sql="update register set phone='"+phone+"' where username='"+username+"'";
-                    reg.updateConn(sql);
-                }
-                if(email!=""){
-                    String sql="update register set email='"+email+"' where username='"+username+"'";
-                    reg.updateConn(sql);
-                }
-                if(intro!=""){
-                    String sql="update register set introduce='"+intro+"' where username='"+username+"'";
-                    reg.updateConn(sql);
-                }
-                request.getRequestDispatcher("/info.jsp").forward(request, response);
+                String sql1 = "insert into clubnotice (clubname,content) values('"+clubname+"','"+content+"')";
+                reg.insertConn(sql1);
+                request.getRequestDispatcher("/manageclub.jsp?clubname="+clubname).forward(request, response);
             } catch (Exception ex) {
-                Logger.getLogger(changeinfoservlet.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(createclub.class.getName()).log(Level.SEVERE, null, ex);
             }
+            reg.dbclose();
         } finally {
             out.close();
         }
@@ -92,6 +73,8 @@ public class changeinfoservlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
     }
 
     /**
@@ -106,6 +89,8 @@ public class changeinfoservlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
     }
 
     /**

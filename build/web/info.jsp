@@ -56,12 +56,12 @@
                             String sql="select * from register where username='"+username+"'";
                             rs=userinfo.executeQuery(sql);
                             if(rs.next()){
-                                name=rs.getString(1);
-                                sex=rs.getString(3);
-                                school=rs.getString(4);
-                                phone=rs.getString(5);
-                                email=rs.getString(6);
-                                intro=rs.getString(7);
+                                name=rs.getString("username");
+                                sex=rs.getString("sex");
+                                school=rs.getString("school");
+                                phone=rs.getString("phone");
+                                email=rs.getString("email");
+                                intro=rs.getString("introduce");
                             }
                         }catch (Exception ex) {
                             Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);

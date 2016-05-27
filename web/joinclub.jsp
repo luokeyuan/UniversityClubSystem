@@ -4,6 +4,10 @@
     Author     : MR.l
 --%>
 
+<%@page import="com.ucs.jsp.register"%>
+<%@page import="java.util.logging.Logger"%>
+<%@page import="java.util.logging.Level"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,7 +25,7 @@
         </div>
         <div class="wrap">
             <div class="info">
-                <img class="head" alt="头像" src="images/img.png" /><span class="username"><%=session.getAttribute("username")%></span><br/>
+                <img class="head" alt="头像" src="images/img.png" /><span class="username"><%String username=(String)session.getAttribute("username");out.print(username);%></span><br/>
                 <ul class="alist">
                     <li><a href="info.jsp">个人信息</a></li>
                     <li><a href="myclub.jsp">我的社团</a></li>
@@ -33,7 +37,36 @@
                 <div class="club_list join_club_list">
                     <h2>可加入的社团</h2>
                     <ul>
-                        <li><span>社团1</span><button>加入</button><a href="showclub.jsp"><button>查看</button></a></li>
+                        <jsp:useBean id="club" scope="application" class="com.ucs.jsp.register"/>
+                        <%
+                            ResultSet rs=null,rs_1=null,rs_2=null;
+                            try{
+                                club.getConn();
+                                String sql1="select clubname from clubmember where members='"+username+"'";
+                                rs=club.executeQuery(sql1);
+                                
+                                if(!rs.next()){
+                                    String sql="select clubname from clubowner where username!='"+username+"';";
+                                    rs_1=club.executeQuery(sql);
+                                    rs_2=club.executeQuery(sql);
+                                }else{
+                                    String sql="select clubname from clubowner where clubname!=(select clubname from clubmember where members='"+username+"') and username!='"+username+"';";
+                                    rs_1=club.executeQuery(sql);
+                                    rs_2=club.executeQuery(sql);
+                                }
+                                
+                                if(!rs_1.next()){
+                                    out.print("<li>还没有人拥有社团，赶紧自己<a href=\"createclub.jsp\">创建</a>一个吧！</li>");
+                                }else{
+                                    while(rs_2.next()){
+                                        out.print("<li><span>"+rs_2.getString("clubname")+"</span><button>加入</button><a href=\"showclub.jsp?clubname="+rs_2.getString("clubname")+"\"><button>查看</button></a></li>");
+                                    }
+                                }
+                                club.dbclose();
+                            }catch (Exception ex) {
+                                Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        %>
                     </ul>
                 </div>
             </div>

@@ -4,6 +4,10 @@
     Author     : MR.l
 --%>
 
+<%@page import="com.ucs.jsp.register"%>
+<%@page import="java.util.logging.Logger"%>
+<%@page import="java.util.logging.Level"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <!DOCTYPE html>
@@ -33,22 +37,32 @@
             <div class="content">
                 <h2>社团动态</h2>
                 <ul>
-                    <li>
-                        <a href="#">社团1</a><span class="date">发稿时间</span>
-                        <p>内容</p>
-                    </li>
-                    <li>
-                        <a href="#">社团1</a><span class="date">发稿时间</span>
-                        <p>内容</p>
-                    </li>
-                    <li>
-                        <a href="#">社团1</a><span class="date">发稿时间</span>
-                        <p>内容</p>
-                    </li>
-                    <li>
-                        <a href="#">社团1</a><span class="date">发稿时间</span>
-                        <p>内容</p>
-                    </li>
+                    <jsp:useBean id="club" scope="application" class="com.ucs.jsp.register"/>
+                    <%
+                        String username=(String)session.getAttribute("username");
+                        club.getConn();
+                        ResultSet rs=null,rs_1=null,rs_2=null,rs_3=null;
+                        try{
+                            club.getConn();
+                            String sql="select * from clubnotice where clubname in (select clubname from clubowner where username='"+username
+                                    +"') or clubname in (select clubname from clubmember where members='"+username+"')";
+                            //String sql="select * from clubnotice where clubname in (select clubname from clubowner where username='"+username+"')";
+                            //String sql1="select * from clubnotice where clubname in (select clubname from clubmember where members='"+username+"')";
+                            rs=club.executeQuery(sql);
+                            rs_1=club.executeQuery(sql);
+                            if(!rs.next()){
+                                out.print("<li>暂时没有任何社团动态！</li>");
+                            }else{
+                                while(rs_1.next()){
+                                   out.print("<li><a href=\"#\">"+rs_1.getString("clubname")+"</a><span class=\"date\">发稿时间</span><p>"+rs_1.getString("content")+"</p></li>"); 
+                                }
+                            }
+
+                        }catch (Exception ex) {
+                            Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        club.dbclose();
+                    %>
                 </ul>
             </div>
         </div>

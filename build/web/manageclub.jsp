@@ -4,6 +4,10 @@
     Author     : MR.l
 --%>
 
+<%@page import="java.util.logging.Logger"%>
+<%@page import="com.ucs.jsp.register"%>
+<%@page import="java.util.logging.Level"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,46 +20,81 @@
     <body>
         <div class="header">
             <div class="nav">
-                <h1>高校社团管理系统</h1><span class="link"><a href="#">返回</a><a href="main.jsp">首页</a><a href="index.jsp">退出系统</a></span>
+                <h1>高校社团管理系统</h1><span class="link"><a href="myclub.jsp">返回</a><a href="main.jsp">首页</a><a href="index.jsp">退出系统</a></span>
             </div>
         </div>
         <div class="wrap">
             <div class="clubinfo">
-                名称：<span>社团</span><br/>
-                简介：<p>上的交流看法集散地立刻解放了可是大家发杀了看到房间昆仑山搭街坊卡拉速度的健康来发讲啥的考了几分看电视机分厘卡实施阶段了开发建设的快乐反对就算开了房间阿三啥的jfk</p>
+                名称：<span><%String clubname=new String(request.getParameter("clubname").getBytes("iso-8859-1"),"utf-8"); %><%=clubname%></span><br/>
+                简介：
+                <jsp:useBean id="club" scope="application" class="com.ucs.jsp.register"/>
+                <%
+                    ResultSet rs=null;
+                    try{
+                        club.getConn();
+                        String sql="select * from club where clubname='"+clubname+"'";
+                        rs=club.executeQuery(sql);
+                        if(rs.next()){
+                            out.print("<p>"+rs.getString("introduce")+"</p>");
+                        }
+                        
+                    }catch (Exception ex) {
+                        Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                %>
             </div>
             <div class="notice">
                 <div class="edit">
-                    发布公告<textarea></textarea>
-                    <button type="submit">完&nbsp;成</button>
+                    <form action="announcenotice" method="post">
+                        发布公告<textarea name="content"></textarea>
+                        <input type="hidden" value="<%=clubname%>" name="clubname">
+                        <button type="submit">完&nbsp;成</button>
+                    </form>
                 </div>
                 <div class="shownotice">
                     <ul>
-                        <li>
-                            <p>内容</p>
-                            <span class="date">发稿时间</span><a href="#">删除</a>
-                        </li>
-                        <li>
-                            <p>内容</p>
-                            <span class="date">发稿时间</span><a href="#">删除</a>
-                        </li>
-                        <li>
-                            <p>内容</p>
-                            <span class="date">发稿时间</span><a href="#">删除</a>
-                        </li>
-                        <li>
-                            <p>内容</p>
-                            <span class="date">发稿时间</span><a href="#">删除</a>
-                        </li>
+                        
+                            <%
+                            try{
+                                ResultSet n_rs1=null,n_rs=null;
+                                String sql="select * from clubnotice where clubname='"+clubname+"'";
+                                n_rs=club.executeQuery(sql);
+                                n_rs1=club.executeQuery(sql);
+                                if(!n_rs.next()){
+                                    out.print("<li><p>你还没有发布任何公告！</p></li>");
+                                }else{
+                                    while(n_rs1.next()){
+                                        out.print("<li><p>"+n_rs1.getString("content")+"</p><span class=\"date\">发稿时间</span><a href='#'>删除</a></li>");
+                                    }
+                                }
+                            }catch (Exception ex) {
+                                Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            %>
                     </ul>
                 </div>
             </div>
             <div class="members">
                 <h5>社团成员</h5>
                 <ul>
-                    <li>成员1<button type="button">删除</button></li>
-                    <li>成员2<button type="button">删除</button></li>
-                    <li>成员3<button type="button">删除</button></li>
+                    <%
+                    try{
+                        String sql="select * from clubmember where clubname='"+clubname+"'";
+                        ResultSet m_rs=null,m_rs1=null;
+                        m_rs=club.executeQuery(sql);
+                        m_rs1=club.executeQuery(sql);
+                        if(!m_rs.next()){
+                            out.print("<li>还没有成员！</li>");
+                        }else{
+                            while(m_rs1.next()){
+                                out.print("<li>"+m_rs.getString("members")+"<button type=\"button\">删除</button></li>");
+                            }
+                        }
+                        club.dbclose();
+                    }catch (Exception ex) {
+                        Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    %>
                 </ul>
             </div>
         </div>

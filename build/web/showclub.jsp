@@ -4,6 +4,10 @@
     Author     : MR.l
 --%>
 
+<%@page import="com.ucs.jsp.register"%>
+<%@page import="java.util.logging.Logger"%>
+<%@page import="java.util.logging.Level"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,23 +25,53 @@
         </div>
         <div class="wrap">
             <div class="club_info">
-                <span class="title">社团</span>创建者：<span>xxx</span>所在学校：<span>xxx</span>
-                <p>简介快乐发动机功率是大看见了高科技撒旦立刻感觉啥代理机构考虑啥的就够了卡刷公交卡阿桑的歌卡上的公交卡是法国恺撒奖地方噶系法术抵抗嘎的风格叫啥的飞机公司的立法机构开始大幅高开了家的沙发价格考虑的沙福建高考啊对手浮空攻击送到附近告诉对方进攻k</p>
+                <jsp:useBean id="club" scope="application" class="com.ucs.jsp.register"/>
+                <%
+                    String clubname=new String(request.getParameter("clubname").getBytes("iso-8859-1"),"utf-8"); 
+                    String owner="",school="",introduce="";
+                    club.getConn();
+                    ResultSet rs=null,rs_1=null,rs_2=null;
+                    try{
+                        club.getConn();
+                        String sql="select username from clubowner where clubname='"+clubname+"'";
+                        rs=club.executeQuery(sql);
+                        if(rs.next()){
+                            owner=rs.getString("username");
+                            String sql1="select school from register where username='"+owner+"'";
+                            rs_1=club.executeQuery(sql1);
+                            if(rs_1.next()){
+                                school=rs_1.getString("school");
+                            }
+                        }
+                        String sql2="select introduce from club where clubname='"+clubname+"'";
+                        rs_2=club.executeQuery(sql2);
+                        if(rs_2.next()){
+                            introduce=rs_2.getString("introduce");
+                        }
+                        
+                    }catch (Exception ex) {
+                        Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                %>
+                <span class="title"><%=clubname%></span>创建者：<span><%=owner%></span>所在学校：<span><%=school%></span>
+                <p><%=introduce%></p>
             </div>
             <div class="club_dyn">
                 <ul>
-                    <li>
-                        <a href="#">社团1</a><span class="date">发稿时间</span>
-                        <p>内容</p>
-                    </li>
-                    <li>
-                        <a href="#">社团1</a><span class="date">发稿时间</span>
-                        <p>内容</p>
-                    </li>
-                    <li>
-                        <a href="#">社团1</a><span class="date">发稿时间</span>
-                        <p>内容</p>
-                    </li>
+                    <%
+                        ResultSet rs_3=null,rs_4=null;
+                        String sql3="select * from clubnotice where clubname='"+clubname+"'";
+                        rs_3=club.executeQuery(sql3);
+                        rs_4=club.executeQuery(sql3);
+                        if(!rs_3.next()){
+                            out.print("<li><p>该社团到现在为止还没有发布任何公告或消息！</p></li>");
+                        }else{
+                            while(rs_4.next()){
+                                out.print("<li><p>"+rs_4.getString("content")+"</p><span class=\"date\">发稿时间</span></li>");
+                            }
+                        }
+                        club.dbclose();
+                    %>
                 </ul>
             </div>
         </div>

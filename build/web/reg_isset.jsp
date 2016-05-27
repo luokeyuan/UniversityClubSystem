@@ -4,13 +4,13 @@
     Author     : MR.l
 --%>
 
-<%@page import="com.jsp.register"%>
+<%@page import="com.ucs.jsp.register"%>
 <%@page import="java.util.logging.Logger"%>
 <%@page import="java.util.logging.Level"%>
 <%@page import="java.util.logging.Level"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="register" scope="application" class="com.jsp.register"/>
+<jsp:useBean id="register" scope="application" class="com.ucs.jsp.register"/>
 <%
     String reg_name=request.getParameter("reg_name");
     String reg_pwd=request.getParameter("reg_pwd");
@@ -39,7 +39,7 @@
                 }
             }
             if(status==-1){
-                String insertsql="insert into register values('"+reg_name+"','"+reg_pwd+"')";
+                String insertsql="insert into register (username,password) values('"+reg_name+"','"+reg_pwd+"')";
                 register.insertConn(insertsql);
                 status=0;
                 out.print(status);

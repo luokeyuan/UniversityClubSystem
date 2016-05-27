@@ -4,9 +4,25 @@
         <servlet-name>changeinfoservlet</servlet-name>
         <servlet-class>com.ucs.servlet.changeinfoservlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>createclub</servlet-name>
+        <servlet-class>com.ucs.servlet.createclub</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>announcenotice</servlet-name>
+        <servlet-class>com.ucs.servlet.announcenotice</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>changeinfoservlet</servlet-name>
         <url-pattern>/changeinfoservlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createclub</servlet-name>
+        <url-pattern>/createclub</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>announcenotice</servlet-name>
+        <url-pattern>/announcenotice</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -39,9 +39,12 @@ public class register {
     }
     
     public void getConn() throws Exception{
+        String url="jdbc:mariadb://localhost:3306/UCS?user=root&password=root&useUnicode=true&characterEncoding=UTF8";
         try{
-            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-            conn=DriverManager.getConnection("jdbc:derby://localhost:1527/UCS", "mrl", "123456");
+            /*Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            conn=DriverManager.getConnection("jdbc:derby://localhost:1527/UCS", "mrl", "123456");*/
+            Class.forName("org.mariadb.jdbc.Driver");
+            conn=DriverManager.getConnection(url);
             s=conn.createStatement();
         }catch(Exception e){
             System.err.println("aq.executeQuery:"+e.getMessage());

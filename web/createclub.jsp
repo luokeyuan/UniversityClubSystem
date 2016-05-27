@@ -31,11 +31,11 @@
             </div>
             <div class="content">
                 <div class="createclub">
-                <form>
-                        <span class="item">社团名称:</span><input type="text" /><br/>
-                        <span class="item">简介:</span><textarea></textarea><br/>
-                        <button>确认创建</button>
-                </form>
+                    <form action="/UniversityClubSystem/createclub" method="post">
+                        <span class="item">社团名称:</span><input type="text" name="clubname" /><br/>
+                        <span class="item">简介:</span><textarea name="introduce"></textarea><br/>
+                        <button type="submit">确认创建</button>
+                    </form>
                 </div>
             </div>
         </div>
