@@ -54,7 +54,7 @@
                                 out.print("<li>暂时没有任何社团动态！</li>");
                             }else{
                                 while(rs_1.next()){
-                                   out.print("<li><a href=\"#\">"+rs_1.getString("clubname")+"</a><span class=\"date\">发稿时间</span><p>"+rs_1.getString("content")+"</p></li>"); 
+                                   out.print("<li><a href=\"#\">"+rs_1.getString("clubname")+"</a><span class=\"date\">"+rs_1.getString("datetime")+"</span><p>"+rs_1.getString("content")+"</p></li>"); 
                                 }
                             }
 

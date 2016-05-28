@@ -12,6 +12,30 @@
         <servlet-name>announcenotice</servlet-name>
         <servlet-class>com.ucs.servlet.announcenotice</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>joinclub</servlet-name>
+        <servlet-class>com.ucs.servlet.joinclub</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteclub</servlet-name>
+        <servlet-class>com.ucs.servlet.deleteclub</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deletemembers</servlet-name>
+        <servlet-class>com.deletemembers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deletemember</servlet-name>
+        <servlet-class>com.ucs.servlet.deletemember</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deletenotice</servlet-name>
+        <servlet-class>com.ucs.servlet.deletenotice</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>test</servlet-name>
+        <servlet-class>com.ucs.servlet.test</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>changeinfoservlet</servlet-name>
         <url-pattern>/changeinfoservlet</url-pattern>
@@ -23,6 +47,30 @@
     <servlet-mapping>
         <servlet-name>announcenotice</servlet-name>
         <url-pattern>/announcenotice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>joinclub</servlet-name>
+        <url-pattern>/joinclub</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteclub</servlet-name>
+        <url-pattern>/deleteclub</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deletemembers</servlet-name>
+        <url-pattern>/deletemembers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deletemember</servlet-name>
+        <url-pattern>/deletemember</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deletenotice</servlet-name>
+        <url-pattern>/deletenotice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>test</servlet-name>
+        <url-pattern>/test</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

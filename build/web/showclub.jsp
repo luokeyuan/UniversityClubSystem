@@ -20,7 +20,7 @@
     <body>
         <div class="header">
             <div class="nav">
-                <h1>高校社团管理系统</h1><span class="link"><a href="#">返回</a><a href="main.jsp">首页</a><a href="index.jsp">退出系统</a></span>
+                <h1>高校社团管理系统</h1><span class="link"><a href="#" id="back">返回</a><a href="main.jsp">首页</a><a href="index.jsp">退出系统</a></span>
             </div>
         </div>
         <div class="wrap">
@@ -67,7 +67,7 @@
                             out.print("<li><p>该社团到现在为止还没有发布任何公告或消息！</p></li>");
                         }else{
                             while(rs_4.next()){
-                                out.print("<li><p>"+rs_4.getString("content")+"</p><span class=\"date\">发稿时间</span></li>");
+                                out.print("<li><p>"+rs_4.getString("content")+"</p><span class=\"date\">"+rs_4.getString("datetime")+"</span></li>");
                             }
                         }
                         club.dbclose();
@@ -75,5 +75,11 @@
                 </ul>
             </div>
         </div>
+                <script>
+                    var back=document.getElementById('back');
+                    back.onclick=function(){
+                        window.history.back();
+                    }
+                </script>
     </body>
 </html>

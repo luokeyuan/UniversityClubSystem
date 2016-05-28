@@ -4,6 +4,8 @@
     Author     : MR.l
 --%>
 
+<%@page import="java.util.Date"%>
+<%@page import="java.text.DateFormat"%>
 <%@page import="com.ucs.jsp.register"%>
 <%@page import="java.util.logging.Logger"%>
 <%@page import="java.util.logging.Level"%>
@@ -36,7 +38,7 @@
             <div class="content">
                 <div class="club_list join_club_list">
                     <h2>可加入的社团</h2>
-                    <ul>
+                    <ul id="join_club">
                         <jsp:useBean id="club" scope="application" class="com.ucs.jsp.register"/>
                         <%
                             ResultSet rs=null,rs_1=null,rs_2=null;
@@ -50,7 +52,7 @@
                                     rs_1=club.executeQuery(sql);
                                     rs_2=club.executeQuery(sql);
                                 }else{
-                                    String sql="select clubname from clubowner where clubname!=(select clubname from clubmember where members='"+username+"') and username!='"+username+"';";
+                                    String sql="select clubname from clubowner where clubname not in (select clubname from clubmember where members='"+username+"') and username!='"+username+"';";
                                     rs_1=club.executeQuery(sql);
                                     rs_2=club.executeQuery(sql);
                                 }
@@ -59,7 +61,8 @@
                                     out.print("<li>还没有人拥有社团，赶紧自己<a href=\"createclub.jsp\">创建</a>一个吧！</li>");
                                 }else{
                                     while(rs_2.next()){
-                                        out.print("<li><span>"+rs_2.getString("clubname")+"</span><button>加入</button><a href=\"showclub.jsp?clubname="+rs_2.getString("clubname")+"\"><button>查看</button></a></li>");
+                                        out.print("<li><span>"+rs_2.getString("clubname")+"</span><a href=\"joinclub?clubname="+rs_2.getString("clubname")+"\"><button>加入</button></a><a href=\"showclub.jsp?clubname="+
+                                                rs_2.getString("clubname")+"\"><button>查看</button></a></li>");
                                     }
                                 }
                                 club.dbclose();
@@ -73,3 +76,10 @@
         </div>
     </body>
 </html>
+<!--
+/2016/5/27/
+
+加入数据库乱码！！！待解决！
+具体：url传输到joinclub.java servlet乱码
+
+-->

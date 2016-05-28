@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author MR.l
  */
-public class createclub extends HttpServlet {
+public class deletemember extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,18 +41,14 @@ public class createclub extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             register reg=new register();
             ResultSet rs=null;
-            String clubname=request.getParameter("clubname");
-            String intro=request.getParameter("introduce");
-            HttpSession session = request.getSession(true);
-            String username=(String)session.getAttribute("username");
+            String members=new String(request.getParameter("members").getBytes("iso-8859-1"),"utf-8");
+            String clubname=new String(request.getParameter("clubname").getBytes("iso-8859-1"),"utf-8");
             
             try {
                 reg.getConn();
-                String sql1 = "insert into clubowner values('"+clubname+"','"+username+"')";
-                reg.insertConn(sql1);
-                String sql2 = "insert into club (clubname,introduce) values('"+clubname+"','"+intro+"')";
-                reg.insertConn(sql2);
-                request.getRequestDispatcher("/myclub.jsp").forward(request, response);
+                String sql = "delete from clubmember where members='"+members+"' and clubname='"+clubname+"'";
+                reg.deleteConn(sql);
+                request.getRequestDispatcher("manageclub.jsp?=clubname"+clubname).forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(createclub.class.getName()).log(Level.SEVERE, null, ex);
             }

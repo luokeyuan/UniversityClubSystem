@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author MR.l
  */
-public class createclub extends HttpServlet {
+public class joinclub extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,21 +41,20 @@ public class createclub extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             register reg=new register();
             ResultSet rs=null;
-            String clubname=request.getParameter("clubname");
-            String intro=request.getParameter("introduce");
+            String clubname=new String(request.getParameter("clubname").getBytes("iso-8859-1"),"utf-8");
             HttpSession session = request.getSession(true);
             String username=(String)session.getAttribute("username");
+            out.print(clubname);
             
             try {
                 reg.getConn();
-                String sql1 = "insert into clubowner values('"+clubname+"','"+username+"')";
+                String sql1 = "insert into clubmember (members,clubname) values('"+username+"','"+clubname+"')";
                 reg.insertConn(sql1);
-                String sql2 = "insert into club (clubname,introduce) values('"+clubname+"','"+intro+"')";
-                reg.insertConn(sql2);
-                request.getRequestDispatcher("/myclub.jsp").forward(request, response);
+                request.getRequestDispatcher("joinclub.jsp").forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(createclub.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             reg.dbclose();
         } finally {
             out.close();
@@ -75,6 +74,8 @@ public class createclub extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
     }
 
     /**
@@ -89,6 +90,8 @@ public class createclub extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
     }
 
     /**

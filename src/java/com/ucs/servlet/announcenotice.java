@@ -45,15 +45,17 @@ public class announcenotice extends HttpServlet {
             String content=request.getParameter("content");
             HttpSession session = request.getSession(true);
             String username=(String)session.getAttribute("username");
+            String date=request.getParameter("date");
             
             try {
                 reg.getConn();
-                String sql1 = "insert into clubnotice (clubname,content) values('"+clubname+"','"+content+"')";
+                String sql1 = "insert into clubnotice (clubname,content,datetime) values('"+clubname+"','"+content+"','"+date+"')";
                 reg.insertConn(sql1);
                 request.getRequestDispatcher("/manageclub.jsp?clubname="+clubname).forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(createclub.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             reg.dbclose();
         } finally {
             out.close();

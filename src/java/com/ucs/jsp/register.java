@@ -50,7 +50,7 @@ public class register {
             System.err.println("aq.executeQuery:"+e.getMessage());
         }
     }
-    //查询sql
+    //查询记录
     public ResultSet executeQuery(String sql){
         try{
             rs=s.executeQuery(sql);
@@ -69,7 +69,7 @@ public class register {
             System.err.println("aq.excuteQuery:"+ex.getMessage());
         }
     }
-    //插入数据库
+    //插入记录
     public void insertConn(String sql){
         try{
             s.execute(sql);
@@ -77,8 +77,16 @@ public class register {
             System.err.println("aq.executeQuery:"+e.getMessage());
         }
     }
-    //更新数据库
+    //更新记录
     public void updateConn(String sql){
+        try {
+            s.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //删除记录
+    public void deleteConn(String sql){
         try {
             s.executeUpdate(sql);
         } catch (SQLException ex) {

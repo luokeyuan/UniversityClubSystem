@@ -51,8 +51,8 @@
                                     out.print("<li>你还没有加入任何社团！<a href=\"joinclub.jsp\">马上去参加社团！</a></li>");
                                 }else{
                                     while(j_rs1.next()){
-                                        clubname1=j_rs1.getString("clubname");
-                                        out.print("<li><span>"+clubname1+"</span><button>退出</button><a href=\"showclub.jsp?clubname="+clubname1+"\"><button>查看</button></a></li>");
+                                        clubname1=j_rs1.getString("clubname"); 
+                                        out.print("<li><span>"+clubname1+"</span><a href=\"deleteclub?clubname="+clubname1+"\"><button>退出</button></a><a href=\"showclub.jsp?clubname="+clubname1+"\"><button>查看</button></a></li>");
                                     }
                                 }
                             }catch (Exception ex) {

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author MR.l
  */
-public class createclub extends HttpServlet {
+public class deletenotice extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,18 +41,13 @@ public class createclub extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             register reg=new register();
             ResultSet rs=null;
+            int n_id=Integer.parseInt(request.getParameter("n_id"));
             String clubname=request.getParameter("clubname");
-            String intro=request.getParameter("introduce");
-            HttpSession session = request.getSession(true);
-            String username=(String)session.getAttribute("username");
-            
             try {
                 reg.getConn();
-                String sql1 = "insert into clubowner values('"+clubname+"','"+username+"')";
-                reg.insertConn(sql1);
-                String sql2 = "insert into club (clubname,introduce) values('"+clubname+"','"+intro+"')";
-                reg.insertConn(sql2);
-                request.getRequestDispatcher("/myclub.jsp").forward(request, response);
+                String sql = "delete from clubnotice where n_id="+n_id;
+                reg.deleteConn(sql);
+                request.getRequestDispatcher("/manageclub.jsp?clubname="+clubname).forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(createclub.class.getName()).log(Level.SEVERE, null, ex);
             }
