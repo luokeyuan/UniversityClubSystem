@@ -4,6 +4,10 @@
     Author     : MR.l
 --%>
 
+<%@page import="com.ucs.jsp.register"%>
+<%@page import="java.util.logging.Level"%>
+<%@page import="java.util.logging.Logger"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,8 +24,24 @@
             </div>
         </div>
         <div class="wrap">
+            <jsp:useBean id="userinfo" scope="application" class="com.ucs.jsp.register"/>
+            <%
+                String username=(String)session.getAttribute("username");
+                String image="";
+                ResultSet rs=null;
+                try{
+                    userinfo.getConn();
+                    String sql="select * from register where username='"+username+"'";
+                    rs=userinfo.executeQuery(sql);
+                    if(rs.next()){
+                        image="Favicon\\"+rs.getString("image");
+                    }
+                }catch (Exception ex) {
+                    Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            %>
             <div class="info">
-                <img class="head" alt="头像" src="images/img.png" /><span class="username"><%=session.getAttribute("username")%></span><br/>
+                <img class="head" alt="头像" src="<%=image%>" /><span class="username"><%=username%></span><br/>
                 <ul class="alist">
                     <li><a href="info.jsp">个人信息</a></li>
                     <li><a href="myclub.jsp">我的社团</a></li>

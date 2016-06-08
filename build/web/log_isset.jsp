@@ -12,7 +12,7 @@
 <%@page session="true"%>
 <jsp:useBean id="login" scope="application" class="com.ucs.jsp.register"/>
 <% 
-    String log_name=request.getParameter("log_name");
+    String log_name=new String(request.getParameter("log_name").getBytes("iso-8859-1"),"utf-8");
     String log_pwd=request.getParameter("log_pwd");
     String log_type=request.getParameter("log_type");
     

@@ -12,7 +12,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="register" scope="application" class="com.ucs.jsp.register"/>
 <%
-    String reg_name=request.getParameter("reg_name");
+    String reg_name=new String(request.getParameter("reg_name").getBytes("iso-8859-1"),"utf-8");
     String reg_pwd=request.getParameter("reg_pwd");
     
     int status=-1;
@@ -29,16 +29,16 @@
         ResultSet rs=null;
         try {
             register.getConn();
-            String sql="select * from register";
+            String sql="select * from register where username = '" + reg_name + "'";
             rs=register.executeQuery(sql);
-            while(rs.next()){
-                if(rs.getString(1).equals(reg_name)){
-                    status=1;
-                    out.print(status);
-                    break;
-                }
+            
+            
+            if(rs.next()){
+                status=1;//用户已存在
+                out.print(status);
             }
-            if(status==-1){
+
+            if(status==-1){//用户不存在
                 String insertsql="insert into register (username,password) values('"+reg_name+"','"+reg_pwd+"')";
                 register.insertConn(insertsql);
                 status=0;
