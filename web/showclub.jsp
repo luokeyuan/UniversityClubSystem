@@ -36,7 +36,6 @@
                     club.getConn();
                     ResultSet rs=null,rs_1=null,rs_2=null,rs_1_1=null;
                     try{
-                        club.getConn();
                         String sql="select username from clubowner where clubname='"+clubname+"'";
                         rs=club.executeQuery(sql);
                         if(rs.next()){

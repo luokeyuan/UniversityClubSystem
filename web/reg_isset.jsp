@@ -16,37 +16,26 @@
     String reg_pwd=request.getParameter("reg_pwd");
     
     int status=-1;
-    if(reg_name==""&&reg_pwd!=""){
-        status=2;
-        out.print(status);
-    }else if(reg_pwd==""&&reg_name!=""){
-        status=3;
-        out.print(status);
-    }else if(reg_name==""&&reg_pwd==""){
-        status=4;
-        out.print(status);
-    }else{
-        ResultSet rs=null;
-        try {
-            register.getConn();
-            String sql="select * from register where username = '" + reg_name + "'";
-            rs=register.executeQuery(sql);
-            
-            
-            if(rs.next()){
-                status=1;//用户已存在
-                out.print(status);
-            }
+    ResultSet rs=null;
+    try {
+        register.getConn();
+        String sql="select * from register where username = '" + reg_name + "'";
+        rs=register.executeQuery(sql);
 
-            if(status==-1){//用户不存在
-                String insertsql="insert into register (username,password) values('"+reg_name+"','"+reg_pwd+"')";
-                register.insertConn(insertsql);
-                status=0;
-                out.print(status);
-            }
-            register.dbclose();
-        } catch (Exception ex) {
-            Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+
+        if(rs.next()){
+            status=1;//用户已存在
+            out.print(status);
         }
+
+        if(status==-1){//用户不存在
+            String insertsql="insert into register (username,password) values('"+reg_name+"','"+reg_pwd+"')";
+            register.insertConn(insertsql);
+            status=0;
+            out.print(status);
+        }
+        register.dbclose();
+    } catch (Exception ex) {
+        Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
     }
 %>
