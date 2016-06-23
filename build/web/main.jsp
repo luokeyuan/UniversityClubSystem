@@ -25,7 +25,7 @@
         %>
         <div class="header">
             <div class="header-content">
-                <h1>高校社团管理系统</h1><span class="link"><span class="user-link">欢迎你:&nbsp;&nbsp;<a href="info.jsp"><%=username%></a></span><a href="index.jsp">退出系统</a></span>
+                <h1>高校社团管理系统</h1><span class="link"><span class="user-link">欢迎你:&nbsp;&nbsp;[<a href="info.jsp"><%=username%></a>]</span><a href="outSystem">退出系统</a></span>
             </div>
         </div>
         <div class="wrap">
@@ -48,7 +48,7 @@
                     try{
                         club.getConn();
                         String sql="select * from clubnotice where clubname in (select clubname from clubowner where username='"+username
-                                +"') or clubname in (select clubname from clubmember where members='"+username+"')";
+                                +"') or clubname in (select clubname from clubmember where members='"+username+"') order by datetime desc";
                         rs=club.executeQuery(sql);
                         rs_1=club.executeQuery(sql);
                         if(!rs.next()){

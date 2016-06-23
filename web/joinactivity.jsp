@@ -24,7 +24,7 @@
         %>
         <div class="header">
             <div class="header-content">
-                <h1>高校社团管理系统</h1><span class="link"><span class="user-link">欢迎你:&nbsp;&nbsp;<a href="info.jsp"><%=username%></a></span><a href="index.jsp">退出系统</a></span>
+                <h1>高校社团管理系统</h1><span class="link"><span class="user-link">欢迎你:&nbsp;&nbsp;[<a href="info.jsp"><%=username%></a>]</span><a href="outSystem">退出系统</a></span>
             </div>
         </div>
         <div class="wrap">
@@ -45,7 +45,7 @@
                     ResultSet rs_2=null,rs_3=null,rs_4=null,rs_4_1=null;
                     try{
                         club.getConn();
-                        String sql="select * from clubactivity where clubname in (select clubname from clubmember where members='"+username+"')";
+                        String sql="select * from clubactivity where clubname in (select clubname from clubmember where members='"+username+"') order by datetime desc";
                         
                         rs_2=club.executeQuery(sql);
                         rs_3=club.executeQuery(sql);
@@ -62,7 +62,7 @@
                                 rs_4=club.executeQuery(sql1);
                                 if(rs_4.next()){ //已参加活动
                 %>
-                        <div class="panel panel-info">
+                        <div class="panel">
                             <div class="panel-heading" style="position: relative;">
                                 <h3 class="panel-title" style="display: inline-block;margin-right: 10px;"><%=rs_3.getString("title")%></h3><span><%=rs_3.getString("clubname")%></span>
                                 <span class="text-right" style="position:absolute;right:20px;top:12px;">已有 <%=count%> 人参加</span>
@@ -77,7 +77,7 @@
                 <%
                                 }else{  //未参加活动
                 %>
-                        <div class="panel panel-info">
+                        <div class="panel">
                             <div class="panel-heading" style="position: relative;">
                                 <h3 class="panel-title" style="display: inline-block;margin-right: 10px;"><%=rs_3.getString("title")%></h3><span><%=rs_3.getString("clubname")%></span>
                                 <span class="text-right" style="position:absolute;right:20px;top:12px;">已有 <%=count%> 人参加</span>

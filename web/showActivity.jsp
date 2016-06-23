@@ -21,7 +21,7 @@
     <body>
         <div class="header">
             <div class="header-content">
-                <h1>高校社团管理系统</h1><span class="link"><a href="#" id="back">返回</a><a href="main.jsp">首页</a><a href="index.jsp">退出系统</a></span>
+                <h1>高校社团管理系统</h1><span class="link"><a href="#" id="back">返回</a><a href="main.jsp">首页</a><a href="outSystem">退出系统</a></span>
             </div>
         </div>
         <div class="wrap">

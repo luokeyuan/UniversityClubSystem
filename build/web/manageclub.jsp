@@ -24,12 +24,11 @@
     <body>
         <jsp:useBean id="club" scope="application" class="com.ucs.jsp.register"/>
         <%
-//            String clubname=new String(request.getParameter("clubname").getBytes("iso8859-1"),"utf-8");
             String clubname=request.getParameter("clubname");
         %>
         <div class="header">
             <div class="header-content">
-                <h1>高校社团管理系统</h1><span class="link"><a href="myclub.jsp">返回</a><a href="main.jsp">首页</a><a href="index.jsp">退出系统</a></span>
+                <h1>高校社团管理系统</h1><span class="link"><a href="myclub.jsp">返回</a><a href="main.jsp">首页</a><a href="outSystem">退出系统</a></span>
             </div>
         </div>
         <div class="wrap">

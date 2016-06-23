@@ -79,7 +79,7 @@ window.onload=function(){
 						window.open('main.jsp','_self');
 					}
 					if(s==2){
-						window.open('manager.jsp','_self');
+						window.open('adminPages/manager.jsp','_self');
 					}
 					if(s==3){
 						log_user_msg.innerHTML="<i></i>请输入用户名";

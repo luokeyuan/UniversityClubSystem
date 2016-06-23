@@ -21,7 +21,7 @@
     <body>
         <div class="header">
             <div class="header-content">
-                <h1>高校社团管理系统</h1><span class="link"><a href="myclub.jsp">返回</a><a href="main.jsp">首页</a><a href="index.jsp">退出系统</a></span>
+                <h1>高校社团管理系统</h1><span class="link"><a href="myclub.jsp">返回</a><a href="main.jsp">首页</a><a href="outSystem">退出系统</a></span>
             </div>
         </div>
         <div class="wrap">
@@ -102,7 +102,7 @@
                 <div class="col-md-5">  <!-- 公告列表 -->
                     <%
                         ResultSet rs_3=null,rs_4=null;
-                        String sql3="select * from clubnotice where clubname='"+clubname+"'";
+                        String sql3="select * from clubnotice where clubname='"+clubname+"' order by datetime desc";
                         rs_3=club.executeQuery(sql3);
                         rs_4=club.executeQuery(sql3);
                         if(!rs_3.next()){
@@ -126,7 +126,7 @@
                     ResultSet rs_2_1=null,rs_3_1=null,rs_4_1=null,rs_4_2;
                     try{
                         club.getConn();
-                        String sql="select * from clubactivity where clubname='"+clubname+"'";
+                        String sql="select * from clubactivity where clubname='"+clubname+"' order by datetime desc";
                         
                         rs_2_1=club.executeQuery(sql);
                         rs_3_1=club.executeQuery(sql);
@@ -145,7 +145,7 @@
                                 rs_4_1=club.executeQuery(sql1);
                                 if(rs_4_1.next()){ //已参加活动
                 %>
-                        <div class="panel panel-info">
+                        <div class="panel">
                             <div class="panel-heading" style="position: relative;">
                                 <h3 class="panel-title" style="display: inline-block;margin-right: 10px;"><%=rs_3_1.getString("title")%></h3><span><%=rs_3_1.getString("clubname")%></span>
                                 <span class="text-right" style="position:absolute;right:20px;top:12px;">已有 <%=count%> 人参加</span>

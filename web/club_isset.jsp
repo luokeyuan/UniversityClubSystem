@@ -13,7 +13,7 @@
 <jsp:useBean id="register" scope="application" class="com.ucs.jsp.register"/>
 <%
 ResultSet rs=null;
-String clubname=new String(request.getParameter("clubname").getBytes("iso8859-1"),"utf-8");
+String clubname=request.getParameter("clubname");
 
 try {
     register.getConn();

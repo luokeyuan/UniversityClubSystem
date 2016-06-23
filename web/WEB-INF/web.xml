@@ -4,6 +4,18 @@
         <filter-name>encodingFilter</filter-name>
         <filter-class>com.ucs.filter.encodingFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.ucs.filter.LoginFilter</filter-class>
+        <init-param>
+            <param-name>noLoginPaths</param-name>
+            <param-value>index.jsp;/css;/js;/images;reg_isset.jsp;log_isset.jsp;regsucces.jsp</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -68,6 +80,10 @@
         <servlet-name>outactivity</servlet-name>
         <servlet-class>com.ucs.servlet.outactivity</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>outSystem</servlet-name>
+        <servlet-class>com.ucs.servlet.outSystem</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>changeinfoservlet</servlet-name>
         <url-pattern>/changeinfoservlet</url-pattern>
@@ -127,6 +143,10 @@
     <servlet-mapping>
         <servlet-name>outactivity</servlet-name>
         <url-pattern>/outactivity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>outSystem</servlet-name>
+        <url-pattern>/outSystem</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

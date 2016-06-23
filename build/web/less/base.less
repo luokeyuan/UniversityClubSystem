@@ -10,6 +10,7 @@ input,textarea{
 }
 body{
 	font-family: "微软雅黑";
+        background:#EEECE1;
 }
 a{
 	font-family: "宋体";
@@ -21,14 +22,16 @@ a{
 }
 //头部
 .header{
+        width:100%;
 	height: 80px;
 	background-color: #1BBC9B;
 }
 .header-content{
 	width: 1200px;
 	height: 80px;
+	background-color: #1BBC9B;
 	.mar_auto;
-	position: relative;
+        position: relative;
 	h1{
 		height: 80px;
 		line-height: 80px;
@@ -37,10 +40,10 @@ a{
 		font-family: '宋体';
 	}
 	a{
-		font-size: @fz;
+		font-size: @fz - 2;
 		color: #ddd;
 		text-decoration: none;
-		margin-right: 10px;
+                margin-right:10px;
 		&:hover{
 			color: #C81522;
 		}
@@ -55,13 +58,15 @@ a{
 
 	.user-link{
 		color:#ddd;
-		font-size: 14px;
+                font-size: @fz - 2;
 		margin-bottom:5px;
+                padding-right:15px;
 		a:hover{
 			text-decoration: underline;
 		}
 		a{
 			text-decoration: underline;
+                        margin-right:0;
 		}
 	}
 }
@@ -80,17 +85,32 @@ a{
 	background: #F2F2F2;
 	float: left;
 	.border;
+        color:#fff;
+}
+.nav li a{
+    color:#000;
 }
 //第二列
 .content{
-	background: #F2F2F2;
+	/*background: #F2F2F2;*/
 	width:980px;
 	float: right;
-	.border;
 }
 .nav{
 	.active{
 		background-color: #1BBC9B!important;
 		color:#111;
 	}
+}
+
+//面板
+.panel{
+	.panel-heading{
+		background-color: #D6E9C6;
+	}
+}
+
+//按钮
+.btn{
+    background-color:#1BBC9B;
 }

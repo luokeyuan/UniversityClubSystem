@@ -12,6 +12,9 @@
 }
 .content {
   padding: 20px 30px;
+  background-color: #F2F2F2;
+  border: 1px solid #EDFAF5;
+  border-radius: 3px;
 }
 .content .sex {
   line-height: 34px;
