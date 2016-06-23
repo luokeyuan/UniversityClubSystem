@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>com.ucs.filter.encodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>changeinfoservlet</servlet-name>
         <servlet-class>com.ucs.servlet.changeinfoservlet</servlet-class>
@@ -36,6 +44,30 @@
         <servlet-name>test</servlet-name>
         <servlet-class>com.ucs.servlet.test</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>manageclub</servlet-name>
+        <servlet-class>com.ucs.servlet.manageclub</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>joinactivity</servlet-name>
+        <servlet-class>com.ucs.servlet.joinactivity</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteactivity</servlet-name>
+        <servlet-class>com.ucs.servlet.deleteactivity</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateactivity</servlet-name>
+        <servlet-class>com.ucs.servlet.updateactivity</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deletejoiner</servlet-name>
+        <servlet-class>com.ucs.servlet.deletejoiner</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>outactivity</servlet-name>
+        <servlet-class>com.ucs.servlet.outactivity</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>changeinfoservlet</servlet-name>
         <url-pattern>/changeinfoservlet</url-pattern>
@@ -71,6 +103,30 @@
     <servlet-mapping>
         <servlet-name>test</servlet-name>
         <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>manageclub</servlet-name>
+        <url-pattern>/manageclub</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>joinactivity</servlet-name>
+        <url-pattern>/joinactivity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteactivity</servlet-name>
+        <url-pattern>/deleteactivity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateactivity</servlet-name>
+        <url-pattern>/updateactivity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deletejoiner</servlet-name>
+        <url-pattern>/deletejoiner</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>outactivity</servlet-name>
+        <url-pattern>/outactivity</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

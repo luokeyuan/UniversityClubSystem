@@ -12,7 +12,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="register" scope="application" class="com.ucs.jsp.register"/>
 <%
-    String reg_name=new String(request.getParameter("reg_name").getBytes("iso-8859-1"),"utf-8");
+    String reg_name=request.getParameter("reg_name");
     String reg_pwd=request.getParameter("reg_pwd");
     
     int status=-1;

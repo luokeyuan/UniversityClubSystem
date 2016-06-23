@@ -62,9 +62,11 @@ public class register {
     //关闭数据库
     public void dbclose(){
         try{
-            rs.close();
-            conn.close();
-            s.close();
+            if(rs!=null||conn!=null||s!=null){
+                rs.close();
+                conn.close();
+                s.close();
+            }
         }catch(SQLException ex){
             System.err.println("aq.excuteQuery:"+ex.getMessage());
         }

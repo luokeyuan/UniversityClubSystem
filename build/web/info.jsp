@@ -14,6 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>高校社团管理系统</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/base.css">
         <link rel="stylesheet" type="text/css" href="css/info.css">
         <style>
@@ -30,15 +31,17 @@
         </style>
     </head>
     <body>
+        <%
+            String username=(String)session.getAttribute("username");
+        %>
         <div class="header">
-            <div class="nav">
-                <h1>高校社团管理系统</h1><span class="link"><a href="main.jsp">首页</a><a href="index.jsp">退出系统</a></span>
+            <div class="header-content">
+                <h1>高校社团管理系统</h1><span class="link"><span class="user-link">欢迎你:&nbsp;&nbsp;<a href="info.jsp"><%=username%></a></span><a href="index.jsp">退出系统</a></span>
             </div>
         </div>
         <jsp:useBean id="userinfo" scope="application" class="com.ucs.jsp.register"/>
         <%
-            String username=(String)session.getAttribute("username");
-            String name="",sex="",school="",phone="",email="",intro="",image="";
+            String name="",sex="",school="",phone="",email="",intro="";
             ResultSet rs=null;
             try{
                 userinfo.getConn();
@@ -51,7 +54,6 @@
                     phone=rs.getString("phone");
                     email=rs.getString("email");
                     intro=rs.getString("introduce");
-                    image="Favicon\\"+rs.getString("image");
                 }
             }catch (Exception ex) {
                 Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,12 +61,13 @@
         %>
         <div class="wrap">
             <div class="info">
-                <img class="head" alt="头像" src="<%=image%>"/><span class="username"><%=username%></span><br/>
-                <ul class="alist">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a href="main.jsp">首页</a></li>
                     <li><a href="info.jsp">个人信息</a></li>
                     <li><a href="myclub.jsp">我的社团</a></li>
                     <li><a href="createclub.jsp">创建社团</a></li>
                     <li><a href="joinclub.jsp">加入社团</a></li>
+                    <li><a href="joinactivity.jsp">参加活动</a></li>
                 </ul>
             </div>
             <div class="content" id="info">
@@ -75,31 +78,54 @@
                     <span class="item">联系电话：</span><span><%=phone%></span><br/>
                     <span class="item">E-mail：</span><span><%=email%></span><br/>
                     <span class="item">个人描述：</span><p><%=intro%></p><br/>
-                    <button type="button" class="btn" id="fixinfo">修改个人信息</button>
+                    <button type="button" class="btn btn-success" id="fixinfo">修改个人信息</button>
                 </div>
             </div>
             <div class="content" id="changeinfo">
-                <form action="/UniversityClubSystem/changeinfoservlet" method="post">
-                    <div class="changehead"><span class="item">头像：</span><img src="images/img.png" alt="头像" /><span class="inputfile">上传图片<input type="file"/></span></div>
-                    <span class="item">性别：</span>
-                    <select name="sex">
-                        <%
-                        String[] sexes = {"保密","男","女"};
-                        for (int i=0; i< 3; i++){
-                            if(sexes[i].equals(sex)){%>
-                                <option value="<%=sexes[i]%>" selected="selected"><%=sexes[i]%></option>
-                            <%}else{%>
-                                <option value="<%=sexes[i]%>"><%=sexes[i]%></option>
-                            <%}
-                        }
-                        %>
-                    </select><br/>
-                    <span class="item">所在学校：</span><input class="fix_info" type="text" name="school" value="<%=school%>"/><br/>
-                    <span class="item">联系电话：</span><input class="fix_info" type="text" name="phone" value="<%=phone%>"/><br/>
-                    <span class="item">E-mail：</span><input class="fix_info" type="text" name="email" value="<%=email%>"/><br/>
-                    <span class="item">个人描述：</span><textarea name="intro"><%=intro%></textarea><br/>
-                    <button type="submit" class="btn" id="submit">保存</button>
-                    <button type="button" class="btn" id="cancel">取消</button>
+                <form action="/UniversityClubSystem/changeinfoservlet" method="post" class="form form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-2 text-right sex">性别：</div>
+                        <div class="col-md-10">
+                            <select name="sex" class="form-control">
+                            <%
+                            String[] sexes = {"保密","男","女"};
+                            for (int i=0; i< 3; i++){
+                                if(sexes[i].equals(sex)){%>
+                                    <option value="<%=sexes[i]%>" selected="selected"><%=sexes[i]%></option>
+                                <%}else{%>
+                                    <option value="<%=sexes[i]%>"><%=sexes[i]%></option>
+                                <%}
+                            }
+                            %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="school" class="col-md-2 control-label">所在学校：</label>
+                        <div class="col-md-10">
+                            <input class="fix_info form-control" type="text" name="school" id="school" value="<%=school%>"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-md-2 control-label">联系电话：</label>
+                        <div class="col-md-10">
+                            <input class="fix_info form-control" type="text" name="phone" id="phone" value="<%=phone%>"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">E-mail：</label>
+                        <div class="col-md-10">
+                            <input class="fix_info form-control" type="text" name="email" value="<%=email%>"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="introduce">个人描述：</label>
+                        <div class="col-md-10">
+                            <textarea name="intro" id="introduce" class="form-control" rows="5"><%=intro%></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success" id="submit">保存</button>
+                    <button type="button" class="btn btn-success" id="cancel">取消</button>
                 </form>
             </div>
         </div>

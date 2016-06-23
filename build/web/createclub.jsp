@@ -10,31 +10,46 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>高校社团管理系统</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/base.css">
         <link rel="stylesheet" type="text/css" href="css/createclub.css">
     </head>
     <body>
+        <%
+            String username=(String)session.getAttribute("username");
+        %>
         <div class="header">
-            <div class="nav">
-                <h1>高校社团管理系统</h1><span class="link"><a href="main.jsp">首页</a><a href="index.jsp">退出系统</a></span>
+            <div class="header-content">
+                <h1>高校社团管理系统</h1><span class="link"><span class="user-link">欢迎你:&nbsp;&nbsp;<a href="info.jsp"><%=username%></a></span><a href="index.jsp">退出系统</a></span>
             </div>
         </div>
         <div class="wrap">
             <div class="info">
-                <img class="head" alt="头像" src="images/img.png" /><span class="username"><%=session.getAttribute("username")%></span><br/>
-                <ul class="alist">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a href="main.jsp">首页</a></li>
                     <li><a href="info.jsp">个人信息</a></li>
                     <li><a href="myclub.jsp">我的社团</a></li>
                     <li><a href="createclub.jsp">创建社团</a></li>
                     <li><a href="joinclub.jsp">加入社团</a></li>
+                    <li><a href="joinactivity.jsp">参加活动</a></li>
                 </ul>
             </div>
             <div class="content">
                 <div class="createclub">
-                    <form action="createclub" method="post" onsubmit="return check()">
-                        <span class="item">社团名称:</span><input type="text" name="clubname" id="clubname" /><span id="warning"></span><br/>
-                        <span class="item">简介:</span><textarea name="introduce" id="introduce"></textarea><br/>
-                        <button type="submit" id="submit">确认创建</button>
+                    <form action="createclub" method="post" onsubmit="return check()" class="form form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"><span style="color:red">*</span>社团名称:</label>
+                            <div class="col-md-10">
+                                <input type="text" name="clubname" id="clubname" class="form-control" /><span id="warning" style="color:red;margin-left:10px;"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"><span style="color:red">*</span>简介:</label>
+                            <div class="col-md-10">
+                                <textarea name="introduce" id="introduce" class="form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" id="submit" class="btn btn-success">确认创建</button>
                     </form>
                 </div>
             </div>

@@ -16,29 +16,34 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>高校社团管理系统</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/base.css">
         <link rel="stylesheet" type="text/css" href="css/myclub.css">
     </head>
     <body>
+        <%
+            String username=(String)session.getAttribute("username");
+        %>
         <div class="header">
-            <div class="nav">
-                <h1>高校社团管理系统</h1><span class="link"><a href="main.jsp">首页</a><a href="index.jsp">退出系统</a></span>
+            <div class="header-content">
+                <h1>高校社团管理系统</h1><span class="link"><span class="user-link">欢迎你:&nbsp;&nbsp;<a href="info.jsp"><%=username%></a></span><a href="index.jsp">退出系统</a></span>
             </div>
         </div>
         <div class="wrap">
             <div class="info">
-                <img class="head" alt="头像" src="images/img.png" /><span class="username"><%String username=(String)session.getAttribute("username");out.print(username);%></span><br/>
-                <ul class="alist">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a href="main.jsp">首页</a></li>
                     <li><a href="info.jsp">个人信息</a></li>
                     <li><a href="myclub.jsp">我的社团</a></li>
                     <li><a href="createclub.jsp">创建社团</a></li>
                     <li><a href="joinclub.jsp">加入社团</a></li>
+                    <li><a href="joinactivity.jsp">参加活动</a></li>
                 </ul>
             </div>
             <div class="content">
                 <div class="club_list join_club_list">
                     <h2>可加入的社团</h2>
-                    <ul id="join_club">
+                    <ul id="join_club" class="list-group">
                         <jsp:useBean id="club" scope="application" class="com.ucs.jsp.register"/>
                         <%
                             ResultSet rs=null,rs_1=null,rs_2=null;
@@ -58,11 +63,15 @@
                                 }
                                 
                                 if(!rs_1.next()){
-                                    out.print("<li>还没有人拥有社团，赶紧自己<a href=\"createclub.jsp\">创建</a>一个吧！</li>");
+                                    out.print("<li class='list-group-item'>暂时没有任何可加入社团！</li>");
                                 }else{
                                     while(rs_2.next()){
-                                        out.print("<li><span>"+rs_2.getString("clubname")+"</span><a href=\"joinclub?clubname="+rs_2.getString("clubname")+"\"><button>加入</button></a><a href=\"showclub.jsp?clubname="+
-                                                rs_2.getString("clubname")+"\"><button>查看</button></a></li>");
+                        %>
+                        <li class="list-group-item" style="position: relative;"><%=rs_2.getString("clubname")%>
+                            <a href='joinclub?clubname=<%=rs_2.getString("clubname")%>'><button class='btn btn-xs btn-success' style="position:absolute;right:20px;">加入</button></a>
+                            <a href='showclub_not_in.jsp?clubname=<%=rs_2.getString("clubname")%>'><button class='btn btn-xs btn-success' style="position:absolute;right:70px;">查看</button></a>
+                        </li>
+                        <%
                                     }
                                 }
                                 club.dbclose();
@@ -76,10 +85,3 @@
         </div>
     </body>
 </html>
-<!--
-/2016/5/27/
-
-加入数据库乱码！！！待解决！
-具体：url传输到joinclub.java servlet乱码
-
--->

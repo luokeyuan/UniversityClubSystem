@@ -38,8 +38,6 @@ public class changeinfoservlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private String fileNameExtractorRegex = "filename=\".+\"";
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -55,18 +53,6 @@ public class changeinfoservlet extends HttpServlet {
             String email=request.getParameter("email");
             String intro=request.getParameter("intro");
             HttpSession session = request.getSession(true);
-            
-            //获取头像
-//            String path = this.getServletContext().getRealPath("/");
-//            Part p = request.getPart("pic");
-//            String fn = "";
-//            if(p!=null||!"".equals(p.toString())){
-//                String fname = getFileName(p);
-//                int index = fname.lastIndexOf('\\');
-//                fn = fname.substring(index+1);
-//                p.write(path+"Favicon\\"+fn);
-//                out.write("bullllll");
-//            }
             
             try {
                 reg.getConn();
@@ -91,10 +77,6 @@ public class changeinfoservlet extends HttpServlet {
                     String sql="update register set introduce='"+intro+"' where username='"+username+"'";
                     reg.updateConn(sql);
                 }
-//                if(fn!=""){
-//                    String sql="update register set image='"+fn+"' where username='"+username+"'";
-//                    reg.updateConn(sql);
-//                }
                 request.getRequestDispatcher("/info.jsp").forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(changeinfoservlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,17 +86,6 @@ public class changeinfoservlet extends HttpServlet {
         }
     }
 
-//    private String getFileName(Part part) { //获取input文件
-//        String cotentDesc = part.getHeader("content-disposition");
-//        String fileName = null;
-//        Pattern pattern = Pattern.compile(fileNameExtractorRegex);
-//        Matcher matcher = pattern.matcher(cotentDesc);
-//        if(matcher.find()){
-//            fileName = matcher.group();
-//            fileName = fileName.substring(10, fileName.length()-1);
-//        }
-//        return fileName;
-//    }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -156,7 +127,3 @@ public class changeinfoservlet extends HttpServlet {
     }// </editor-fold>
 
 }
-/*bug
-如果上传文件为空，则发出异常，导致页面无法跳转
-
-*/

@@ -41,15 +41,16 @@ public class deleteclub extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             register reg=new register();
             ResultSet rs=null;
-            String clubname=new String(request.getParameter("clubname").getBytes("iso-8859-1"),"utf-8");
+            String clubname=request.getParameter("clubname");
             HttpSession session = request.getSession(true);
             String username=(String)session.getAttribute("username");
-            
+            int a_id = -1;
             try {
                 reg.getConn();
                 String sql = "delete from clubmember where members='"+username+"' and clubname='"+clubname+"'";
                 reg.deleteConn(sql);
-                
+                String sql1 = "delete from activityjoiner where a_id in (select a_id from clubactivity where clubname='"+clubname+"') and joinername='"+username+"'";
+                reg.deleteConn(sql1);
                 request.getRequestDispatcher("myclub.jsp").forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(createclub.class.getName()).log(Level.SEVERE, null, ex);

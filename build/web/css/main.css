@@ -8,27 +8,3 @@
   border-bottom: 2px solid #ccc;
   padding: 10px 0 5px 5px;
 }
-.content li {
-  list-style-type: none;
-  margin: 10px 30px;
-  border: 1px solid #A7A7A7;
-  border-radius: 5px;
-  padding: 5px;
-}
-.content a {
-  font-size: 20px;
-  color: #000;
-  text-decoration: none;
-}
-.content a:hover {
-  color: #8BA764;
-}
-.content .date {
-  font-size: 14px;
-  float: right;
-  margin-right: 80px;
-}
-.content p {
-  padding: 5px 80px 10px 10px;
-  font-size: 16px;
-}

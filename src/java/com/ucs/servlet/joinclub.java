@@ -40,12 +40,9 @@ public class joinclub extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
             register reg=new register();
-            ResultSet rs=null;
-            String clubname=new String(request.getParameter("clubname").getBytes("iso-8859-1"),"utf-8");
+            String clubname=request.getParameter("clubname");
             HttpSession session = request.getSession(true);
             String username=(String)session.getAttribute("username");
-            out.print(clubname);
-            
             try {
                 reg.getConn();
                 String sql1 = "insert into clubmember (members,clubname) values('"+username+"','"+clubname+"')";

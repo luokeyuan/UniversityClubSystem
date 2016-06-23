@@ -41,8 +41,8 @@ public class deletemember extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             register reg=new register();
             ResultSet rs=null;
-            String members=new String(request.getParameter("members").getBytes("iso-8859-1"),"utf-8");
-            String clubname=new String(request.getParameter("clubname").getBytes("iso-8859-1"),"utf-8");
+            String members=request.getParameter("members");
+            String clubname=request.getParameter("clubname");
             
             try {
                 reg.getConn();

@@ -2,113 +2,90 @@
   border: 1px solid #EDFAF5;
   border-radius: 3px;
 }
-.clubinfo {
-  width: 194px;
+.operate_list {
+  width: 150px;
   background: #F2F2F2;
   border: 1px solid #EDFAF5;
   border-radius: 3px;
-  float: left;
-  padding: 3px;
-  line-height: 26px;
+  font-size: 18px;
+}
+.operate_list li {
+  list-style-type: none;
+  text-align: center;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  cursor: pointer;
+}
+.operate_list li:hover {
+  background: #D6D6D6;
+}
+.operate_list .active {
+  background: #D6D6D6;
 }
 .notice {
-  width: 800px;
   background: #F2F2F2;
   border: 1px solid #EDFAF5;
   border-radius: 3px;
-  margin: 0 5px 0 5px;
-  float: left;
-}
-.notice li {
-  list-style-type: none;
-  margin: 10px 30px;
-  border: 1px solid #A7A7A7;
-  border-radius: 5px;
-  padding: 5px;
-}
-.notice .date {
-  font-size: 14px;
-}
-.notice a {
-  font-size: 14px;
-  position: relative;
-  left: 600px;
-  text-decoration: none;
-}
-.notice a:link,
-.notice a:visited {
-  color: #1BBC9B;
-}
-.notice a:hover,
-.notice a:active {
-  color: #C4C4C4;
 }
 .edit {
-  height: 150px;
-  margin: 5px;
-  position: relative;
-  border-bottom: 1px solid #B9CAA8;
+  width: 586px;
+  margin: 5px auto;
 }
-.edit textarea {
-  vertical-align: top;
-  margin-left: 10px;
-  height: 104px;
-  width: 500px;
-  font-size: 16px;
-  padding: 3px 5px;
-}
-.edit button {
-  width: 60px;
-  height: 25px;
-  line-height: 20px;
-  text-align: center;
-  background: #88D8B5;
-  border: 1px solid #EDFAF5;
-  border-radius: 3px;
-  color: #fff;
-  cursor: pointer;
+.clubname {
+  width: 1038px;
   position: absolute;
-  left: 500px;
-  top: 120px;
-}
-.edit button:hover {
-  background-color: #7FC4A7;
-}
-.members {
-  width: 178px;
+  left: 160px;
+  top: 20px;
   background: #F2F2F2;
   border: 1px solid #EDFAF5;
   border-radius: 3px;
-  float: left;
-  padding: 3px;
 }
-.members h5 {
-  font-weight: normal;
-  margin-bottom: 5px;
+.clubname h2 {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #1BBC9B;
 }
-.members li {
-  list-style-type: none;
-  border-bottom: 1px solid #B9CAA8;
-  margin-top: 3px;
-  height: 24px;
-  line-height: 24px;
+.sidebar {
+  width: 1038px;
+  position: absolute;
+  left: 160px;
+  top: 70px;
 }
-.members li:last-child {
-  border: none;
-}
-.members li button {
-  width: 43px;
-  height: 21px;
-  border: none;
-  background-color: #88D8B5;
+.activity {
+  display: none;
+  background: #F2F2F2;
   border: 1px solid #EDFAF5;
   border-radius: 3px;
-  cursor: pointer;
-  font-size: 12px;
-  float: right;
-  margin-right: 15px;
-  color: #fff;
 }
-.members li button:hover {
-  background-color: #7FC4A7;
+.activity button {
+  margin-left: 500px;
+}
+.activity label {
+  font-weight: normal;
+  font-size: 16px;
+}
+.activity .issueAct {
+  margin: 20px 0 20px 0;
+}
+.members {
+  display: none;
+  background: #F2F2F2;
+  border: 1px solid #EDFAF5;
+  border-radius: 3px;
+  padding: 3px;
+}
+.members h2 {
+  font-weight: normal;
+  padding: 10px 15px 15px;
+  border-bottom: 3px solid #ccc;
+}
+.clubinfo {
+  display: none;
+  padding: 5px 50px;
+  background: #F2F2F2;
+  border: 1px solid #EDFAF5;
+  border-radius: 3px;
+  line-height: 26px;
 }

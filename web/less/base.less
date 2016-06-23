@@ -24,7 +24,7 @@ a{
 	height: 80px;
 	background-color: #1BBC9B;
 }
-.nav{
+.header-content{
 	width: 1200px;
 	height: 80px;
 	.mar_auto;
@@ -52,6 +52,18 @@ a{
 		right: 0;
 		bottom:5px;
 	}
+
+	.user-link{
+		color:#ddd;
+		font-size: 14px;
+		margin-bottom:5px;
+		a:hover{
+			text-decoration: underline;
+		}
+		a{
+			text-decoration: underline;
+		}
+	}
 }
 
 
@@ -67,47 +79,18 @@ a{
 	width: 200px;
 	background: #F2F2F2;
 	float: left;
-	margin-left: 4px;
 	.border;
-	.head{
-		width: 100px;
-		height: 100px;
-		background: #eee;
-		padding:4px;
-		margin: 5px 0 0 5px;
-	}
-	.username{
-		font-size: 18px;
-		font-family: "微软雅黑";
-		padding:0 5px;
-		display: inline-block;
-		width:77px;
-		height: 24px;
-		line-height: 24px;
-		color:#343636;
-		overflow: hidden;
-		text-overflow:ellipsis;
-	}
 }
-.alist{
-	list-style: none;
-	margin-top: 20px;
-	li{
-		height: 24px;
-		line-height: 24px;
-		padding:5px 0 5px 5px;
-		a{
-			font-size: @fz+4;
-			color: #343636;
-			text-decoration: none;
-		}
-	}
-}
-
 //第二列
 .content{
 	background: #F2F2F2;
-	margin-left: 220px;
-	margin-right: 10px;
+	width:980px;
+	float: right;
 	.border;
+}
+.nav{
+	.active{
+		background-color: #1BBC9B!important;
+		color:#111;
+	}
 }
