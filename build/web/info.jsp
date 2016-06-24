@@ -51,7 +51,6 @@
                 if(rs.next()){
                     name=rs.getString("username");
                     sex=rs.getString("sex");
-                    school=rs.getString("school");
                     phone=rs.getString("phone");
                     email=rs.getString("email");
                     intro=rs.getString("introduce");

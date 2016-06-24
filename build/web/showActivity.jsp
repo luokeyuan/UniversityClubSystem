@@ -19,17 +19,11 @@
         <link rel="stylesheet" type="text/css" href="css/showActivity.css">
     </head>
     <body>
-        <%String user = (String)session.getAttribute("username"); %>
-        <div class="header">
-            <div class="header-content">
-                <h1>高校社团管理系统</h1><span class="link"><span class="user-link">欢迎你:&nbsp;&nbsp;[<a href="info.jsp"><%=user%></a>]</span><a href="#" id="back">返回</a><a href="main.jsp">首页</a><a href="outSystem">退出系统</a></span>
-            </div>
-        </div>
-        <div class="wrap">
-            <div class="activity">
             <jsp:useBean id="activity" scope="application" class="com.ucs.jsp.register"/>
             <%
+                String user = (String)session.getAttribute("username");
                 String username=request.getParameter("username");
+                String clubname="";
                 int a_id=Integer.parseInt(request.getParameter("a_id"));
                 String title="",content="";
                 activity.getConn();
@@ -41,12 +35,20 @@
                     if(rs.next()){
                         title=rs.getString("title");
                         content=rs.getString("content");
+                        clubname=rs.getString("clubname");
                     }
                     activity.dbclose();
                 }catch (Exception ex) {
                     Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
                 }
             %>
+        <div class="header">
+            <div class="header-content">
+                <h1>高校社团管理系统</h1><span class="link"><span class="user-link">欢迎你:&nbsp;&nbsp;[<a href="info.jsp"><%=user%></a>]</span><a href="manageclub.jsp?clubname=<%=clubname%>">返回</a><a href="main.jsp">首页</a><a href="outSystem">退出系统</a></span>
+            </div>
+        </div>
+        <div class="wrap">
+            <div class="activity">
                 <form action="updateactivity" method="post" class="form form-horizontal">
                     <div class="form-group">
                         <div class="col-md-2 text-right">活动主题：</div>
@@ -92,14 +94,11 @@
             </div>
         </div>
         <script type="text/javascript">
-            var back=document.getElementById('back');
             var fix=document.getElementById('fix');
             var confirm_fix=document.getElementById('confirm_fix');
             var cancel_fix=document.getElementById('cancel_fix');
             var actContent=document.getElementById('actContent');
-            back.onclick=function(){
-                window.history.back();
-            }
+            
             fix.onclick=function(){
                 confirm_fix.removeAttribute("disabled");
                 actContent.removeAttribute("disabled");
