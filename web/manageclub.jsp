@@ -63,7 +63,7 @@
                 try{
                     club.getConn();
                     ResultSet n_rs1=null,n_rs=null;
-                    String sql="select * from clubnotice where clubname='"+clubname+"'";
+                    String sql="select * from clubnotice where clubname='"+clubname+"' order by datetime desc";
                     n_rs=club.executeQuery(sql);
                     n_rs1=club.executeQuery(sql);
                     if(n_rs.next()){
@@ -111,7 +111,7 @@
                     try{
                         club.getConn();
                         ResultSet a_rs1=null,a_rs=null,rs_4_1=null;
-                        String sql="select * from clubactivity where clubname='"+clubname+"'";
+                        String sql="select * from clubactivity where clubname='"+clubname+"' order by datetime desc";
                         a_rs=club.executeQuery(sql);
                         a_rs1=club.executeQuery(sql);
                         if(a_rs.next()){

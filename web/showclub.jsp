@@ -30,22 +30,17 @@
                 <jsp:useBean id="club" scope="application" class="com.ucs.jsp.register"/>
                 <%
                     String clubname=request.getParameter("clubname"); 
-                    String owner="",school="",introduce="";
+                    String owner="",introduce="";
                     int members = 1;
                     
                     club.getConn();
-                    ResultSet rs=null,rs_1=null,rs_1_1=null;
+                    ResultSet rs=null,rs_1_1=null;
                     try{
                         String sql="select * from clubowner where clubname='"+clubname+"'";
                         rs=club.executeQuery(sql);
                         if(rs.next()){
                             owner=rs.getString("username");
                             introduce=rs.getString("introduce");
-                            String sql1="select school from register where username='"+owner+"'";
-                            rs_1=club.executeQuery(sql1);
-                            if(rs_1.next()){
-                                school=rs_1.getString("school");
-                            }
                         }
                         //统计社团成员数量
                         String sql_club="select username from clubowner where clubname='"+clubname+"'";
@@ -58,7 +53,7 @@
                         Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 %>
-                <span class="title"><%=clubname%></span>创建者：<span><%=owner%></span>所在学校：<span><%=school%></span><span>社员：<%=members%>人</span>
+                <span class="title"><%=clubname%></span>创建者：<span><%=owner%></span><span>社员：<%=members%>人</span>
                 <p><%=introduce%></p>
             </div>
             <div class="container">

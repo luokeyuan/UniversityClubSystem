@@ -70,14 +70,13 @@
                     <li><a href="createclub.jsp">创建社团</a></li>
                     <li><a href="joinclub.jsp">加入社团</a></li>
                     <li><a href="joinactivity.jsp">参加活动</a></li>
-                    <li><a href="myMessage.jsp">我的消息<span class="badge" id="badge"></a></li>
+                    <li><a href="myMessage.jsp">我的消息</a></li>
                 </ul>
             </div>
             <div class="content" id="info">
                 <div class="showinfo">
                     <span class="item">用户名：</span><span><%=name%></span><br/>
                     <span class="item">性别：</span><span><%=sex%></span><br/>
-                    <span class="item">所在学校：</span><span><%=school%></span><br/>
                     <span class="item">联系电话：</span><span><%=phone%></span><br/>
                     <span class="item">E-mail：</span><span><%=email%></span><br/>
                     <span class="item">个人描述：</span><p><%=intro%></p><br/>
@@ -101,12 +100,6 @@
                             }
                             %>
                             </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="school" class="col-md-2 control-label">所在学校：</label>
-                        <div class="col-md-10">
-                            <input class="fix_info form-control" type="text" name="school" id="school" value="<%=school%>"/>
                         </div>
                     </div>
                     <div class="form-group">

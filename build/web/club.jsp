@@ -79,18 +79,18 @@
                             while(rs.next()){
                                 int member = 0, notice = 0, activity = 0;
                                 String state = "";
-                                
-                                String sql_mem = "select * from clubmember where clubname = '"+rs.getString("clubname")+"'";
+                                String clubname = rs.getString("clubname");
+                                String sql_mem = "select * from clubmember where clubname = '"+clubname+"'";
                                 rs_mem=user.executeQuery(sql_mem);
                                 while(rs_mem.next()){
                                     member++;
                                 }
-                                String sql_notice = "select * from clubnotice where clubname = '"+rs.getString("clubname")+"'";
+                                String sql_notice = "select * from clubnotice where clubname = '"+clubname+"'";
                                 rs_notice=user.executeQuery(sql_notice);
                                 while(rs_notice.next()){
                                     notice++;
                                 }
-                                String sql_activity = "select * from clubactivity where clubname = '"+rs.getString("clubname")+"'";
+                                String sql_activity = "select * from clubactivity where clubname = '"+clubname+"'";
                                 rs_activity=user.executeQuery(sql_activity);
                                 while(rs_activity.next()){
                                     activity++;
@@ -106,9 +106,9 @@
                         <td><%=rs.getString("introduce")%></td>
                         <td><%=state%></td>
                         <td><%=member%></td>
-                        <td><a href='club_notice.jsp?clubname=<%=rs.getString("clubname")%>'><%=notice%></a></td>
-                        <td><a href='club_activity.jsp?clubname=<%=rs.getString("clubname")%>'><%=activity%></a></td>
-                        <td><a href="deleteclub_admin?clubname=<%=rs.getString("clubname")%>"><button class="btn btn-danger btn-xs">删除</button></a></td>
+                        <td><a href='club_notice.jsp?clubname=<%=clubname%>'><%=notice%></a></td>
+                        <td><a href='club_activity.jsp?clubname=<%=clubname%>'><%=activity%></a></td>
+                        <td><a href="deleteclub_admin?clubname=<%=clubname%>"><button class="btn btn-danger btn-xs">删除</button></a></td>
                     </tr>
                     <%
                                 }else{
@@ -123,8 +123,8 @@
                         <td><a href='club_notice.jsp?clubname=<%=rs.getString("clubname")%>'><%=notice%></a></td>
                         <td><a href='club_activity.jsp?clubname=<%=rs.getString("clubname")%>'><%=activity%></a></td>
                         <td>
-                            <a href="passClub?clubname=<%=rs.getString("clubname")%>"><button class="btn btn-success btn-xs">通过</button></a>
-                            <a href="nopassClub?clubname=<%=rs.getString("clubname")%>"><button class="btn btn-danger btn-xs">不通过</button></a>
+                            <a href="passClub?clubname=<%=clubname%>"><button class="btn btn-success btn-xs">通过</button></a>
+                            <a href="nopassClub?clubname=<%=clubname%>"><button class="btn btn-danger btn-xs">不通过</button></a>
                         </td>
                     </tr>
                     <%

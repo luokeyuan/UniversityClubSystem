@@ -43,7 +43,7 @@
             <jsp:useBean id="userinfo" scope="application" class="com.ucs.jsp.register"/>
         <% 
             String username=request.getParameter("username");
-            String name="",sex="",school="",phone="",email="",intro="";
+            String name="",sex="",phone="",email="",intro="";
             ResultSet rs=null;
             try{
                 userinfo.getConn();
@@ -52,7 +52,6 @@
                 if(rs.next()){
                     name=rs.getString("username");
                     sex=rs.getString("sex");
-                    school=rs.getString("school");
                     phone=rs.getString("phone");
                     email=rs.getString("email");
                     intro=rs.getString("introduce");
@@ -69,7 +68,6 @@
                     <div class="showinfo">
                         <span class="item">用户名：</span><span><%=name%></span><br/>
                         <span class="item">性别：</span><span><%=sex%></span><br/>
-                        <span class="item">所在学校：</span><span><%=school%></span><br/>
                         <span class="item">联系电话：</span><span><%=phone%></span><br/>
                         <span class="item">E-mail：</span><span><%=email%></span><br/>
                         <span class="item">个人描述：</span><p><%=intro%></p><br/>

@@ -48,21 +48,19 @@ public class changeinfoservlet extends HttpServlet {
             register reg=new register();
             ResultSet rs=null;
             String sex=request.getParameter("sex");
-            String school=request.getParameter("school");
             String phone=request.getParameter("phone");
             String email=request.getParameter("email");
             String intro=request.getParameter("intro");
             HttpSession session = request.getSession(true);
             
+            if(intro.indexOf("'")!=-1){  //含有单引号
+                intro=intro.replaceAll("'","''");
+            }
             try {
                 reg.getConn();
                 String username=(String)session.getAttribute("username");
                 if(sex!=""){
                     String sql="update register set sex='"+sex+"' where username='"+username+"'";
-                    reg.updateConn(sql);
-                }
-                if(school!=""){
-                    String sql="update register set school='"+school+"' where username='"+username+"'";
                     reg.updateConn(sql);
                 }
                 if(phone!=""){

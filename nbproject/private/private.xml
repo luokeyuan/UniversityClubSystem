@@ -3,20 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/deleteUser.java</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/createclub.jsp</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/changeinfoservlet.java</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/club_notice.jsp</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/css/base.css</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/club_activity.jsp</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/showclub.jsp</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/js/base.js</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/manager.jsp</file>
             <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/createclub.java</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/deleteclub.java</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/club.jsp</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/deletemember.java</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/deleteclub_admin.java</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/passClub.java</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/createclub.jsp</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/manageclub.jsp</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/main.jsp</file>
         </group>
     </open-files>
 </project-private>

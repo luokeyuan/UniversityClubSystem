@@ -45,7 +45,12 @@ public class createclub extends HttpServlet {
             String intro=request.getParameter("introduce");
             HttpSession session = request.getSession(true);
             String username=(String)session.getAttribute("username");
-            
+            if(clubname.indexOf("'")!=-1){  //含有单引号
+                clubname=clubname.replaceAll("'","''");
+            }
+            if(intro.indexOf("'")!=-1){  //含有单引号
+                intro=intro.replaceAll("'","''");
+            }
             try {
                 reg.getConn();
                 String sql = "select * from clubowner where clubname = '" + clubname + "'";
@@ -56,7 +61,6 @@ public class createclub extends HttpServlet {
                     String sql1 = "insert into clubowner (clubname,username,introduce) values('"+clubname+"','"+username+"','"+intro+"')";
                     reg.insertConn(sql1);
                     out.print("<script>alert(\"你已成功创建社团！\");</script>");
-//                    request.getRequestDispatcher("myclub.jsp").forward(request, response);
                     response.sendRedirect("myclub.jsp");
                 }
             } catch (Exception ex) {

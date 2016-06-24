@@ -42,6 +42,9 @@ public class updateactivity extends HttpServlet {
             ResultSet rs=null;
             int a_id=Integer.parseInt(request.getParameter("a_id"));
             String actContent = request.getParameter("actContent");
+            if(actContent.indexOf("'")!=-1){  //含有单引号
+                actContent=actContent.replaceAll("'","''");
+            }
             try {
                 reg.getConn();
                 String sql="update clubactivity set content='"+actContent+"' where a_id="+a_id;

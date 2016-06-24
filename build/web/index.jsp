@@ -20,8 +20,8 @@
     <div class="content">
         <div class="wrap">
     	<div class="nav">
-                <div class="btnf log-btn" id="login">登录</div>
-                <div class="btnf reg-btn" id="register">注册</div>
+            <div class="btnf log-btn" id="login">登录</div>
+            <div class="btnf reg-btn" id="register">注册</div>
     	</div>
     	<div class="login" id="log-panel">
                 <form method="post">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="usertype">
                         <input type="radio" name="usertype" id="user" value="user" checked="checked"/><label for="user"> 普通用户</label>
-                        &nbsp;<input type="radio" name="usertype" id="admin" value="admin"/><label for="admin"> 管理员</label>			
+                        &nbsp;<input type="radio" name="usertype" id="admin" value="admin"/><label for="admin"> 管理员</label>	
                     </div>
                     <div class="form btn"><input type="button" value="登     录" id="login-sub" /></div>
                 </form>

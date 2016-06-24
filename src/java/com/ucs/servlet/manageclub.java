@@ -54,6 +54,9 @@ public class manageclub extends HttpServlet {
             
             if(formcontent.equals("clubnotice")){ //发布公告
                 String content=request.getParameter("content");
+                if(content.indexOf("'")!=-1){  //含有单引号
+                    content=content.replaceAll("'","''");
+                }
                     //记录公告发布时间
                     Date date = new Date();
                     DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -72,6 +75,13 @@ public class manageclub extends HttpServlet {
             if(formcontent.equals("clubactivity")){ //发布社团活动
                 String actTitle=request.getParameter("actTitle");
                 String actContent=request.getParameter("actContent");
+                
+                if(actTitle.indexOf("'")!=-1){  //含有单引号
+                    actTitle=actTitle.replaceAll("'","''");
+                }
+                if(actContent.indexOf("'")!=-1){  //含有单引号
+                    actContent=actContent.replaceAll("'","''");
+                }
                 //记录活动发布时间
                 Date date = new Date();
                 DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -89,6 +99,9 @@ public class manageclub extends HttpServlet {
             
             if(formcontent.equals("clubinfo")){  //修改社团信息
                 String introduce=request.getParameter("introduce");
+                if(introduce.indexOf("'")!=-1){  //含有单引号
+                    introduce=introduce.replaceAll("'","''");
+                }
                 try {
                     reg.getConn();
                     String sql1 = "update clubowner set introduce='"+introduce+"' where clubname='"+clubname+"'";

@@ -67,7 +67,6 @@
                         <th>用户名</th>
                         <th>密码</th>
                         <th>性别</th>
-                        <th>学校</th>
                         <th>电话</th>
                         <th>邮箱</th>
                         <th>自我介绍</th>
@@ -86,7 +85,6 @@
                                     <td><%=rs.getString("username") %></td>
                                     <td><%=rs.getString("password") %></td>
                                     <td><%=rs.getString("sex") %></td>
-                                    <td><%=rs.getString("school") %></td>
                                     <td><%=rs.getString("phone") %></td>
                                     <td><%=rs.getString("email") %></td>
                                     <td><%=rs.getString("introduce") %></td>
