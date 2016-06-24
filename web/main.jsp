@@ -37,6 +37,7 @@
                     <li><a href="createclub.jsp">创建社团</a></li>
                     <li><a href="joinclub.jsp">加入社团</a></li>
                     <li><a href="joinactivity.jsp">参加活动</a></li>
+                    <li><a href="myMessage.jsp">我的消息</a></li>
                 </ul>
             </div>
             <div class="content">

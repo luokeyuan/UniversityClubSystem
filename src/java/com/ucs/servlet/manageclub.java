@@ -91,7 +91,7 @@ public class manageclub extends HttpServlet {
                 String introduce=request.getParameter("introduce");
                 try {
                     reg.getConn();
-                    String sql1 = "update club set introduce='"+introduce+"' where clubname='"+clubname+"'";
+                    String sql1 = "update clubowner set introduce='"+introduce+"' where clubname='"+clubname+"'";
                     reg.insertConn(sql1);
                     request.getRequestDispatcher("/manageclub.jsp?clubname="+clubname).forward(request, response);
                 } catch (Exception ex) {

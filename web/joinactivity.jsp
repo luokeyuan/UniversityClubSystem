@@ -21,6 +21,7 @@
     <body>
         <%
             String username=(String)session.getAttribute("username");
+            int message_unread = 0;
         %>
         <div class="header">
             <div class="header-content">
@@ -36,19 +37,26 @@
                     <li><a href="createclub.jsp">创建社团</a></li>
                     <li><a href="joinclub.jsp">加入社团</a></li>
                     <li><a href="joinactivity.jsp">参加活动</a></li>
+                    <li><a href="myMessage.jsp">我的消息<span class="badge" id="badge"><%if(message_unread!=0){out.print(message_unread);}%></span></a></li>
                 </ul>
             </div>
             <div class="content">
                 <jsp:useBean id="club" scope="application" class="com.ucs.jsp.register"/>
+                
                 <%
-                    club.getConn();
-                    ResultSet rs_2=null,rs_3=null,rs_4=null,rs_4_1=null;
+                    ResultSet rs_1=null,rs_2=null,rs_3=null,rs_4=null,rs_4_1=null;
                     try{
                         club.getConn();
                         String sql="select * from clubactivity where clubname in (select clubname from clubmember where members='"+username+"') order by datetime desc";
                         
                         rs_2=club.executeQuery(sql);
                         rs_3=club.executeQuery(sql);
+                        
+                        String sql_1 = "select * from usermessage where username='"+username+"' and state=0";
+                        rs_1 = club.executeQuery(sql_1);
+                        while(rs_1.next()){
+                            message_unread++;
+                        }
                         
                         if(rs_2.next()){
                             while(rs_3.next()){

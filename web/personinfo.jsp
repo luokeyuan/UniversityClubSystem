@@ -33,15 +33,16 @@
         </style>
     </head>
     <body>
+        <%String user = (String)session.getAttribute("username"); %>
         <div class="header">
             <div class="header-content">
-                <h1>高校社团管理系统</h1><span class="link"><a href="#" id="back">返回</a><a href="main.jsp">首页</a><a href="outSystem">退出系统</a></span>
+                <h1>高校社团管理系统</h1><span class="link"><span class="user-link">欢迎你:&nbsp;&nbsp;[<a href="info.jsp"><%=user%></a>]</span><a href="#" id="back">返回</a><a href="main.jsp">首页</a><a href="outSystem">退出系统</a></span>
             </div>
         </div>
         <div class="wrap">
             <jsp:useBean id="userinfo" scope="application" class="com.ucs.jsp.register"/>
-        <%
-            String username=request.getParameter("username"); 
+        <% 
+            String username=request.getParameter("username");
             String name="",sex="",school="",phone="",email="",intro="";
             ResultSet rs=null;
             try{

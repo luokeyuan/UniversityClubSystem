@@ -32,23 +32,19 @@
                     String owner="",school="",introduce="";
                     int members = 1;
                     club.getConn();
-                    ResultSet rs=null,rs_1=null,rs_2=null,rs_1_1=null;
+                    ResultSet rs=null,rs_1=null,rs_1_1=null;
                     try{
                         club.getConn();
-                        String sql="select username from clubowner where clubname='"+clubname+"'";
+                        String sql="select * from clubowner where clubname='"+clubname+"'";
                         rs=club.executeQuery(sql);
                         if(rs.next()){
                             owner=rs.getString("username");
+                            introduce=rs.getString("introduce");
                             String sql1="select school from register where username='"+owner+"'";
                             rs_1=club.executeQuery(sql1);
                             if(rs_1.next()){
                                 school=rs_1.getString("school");
                             }
-                        }
-                        String sql2="select introduce from club where clubname='"+clubname+"'";
-                        rs_2=club.executeQuery(sql2);
-                        if(rs_2.next()){
-                            introduce=rs_2.getString("introduce");
                         }
                         //统计社团成员数量
                         String sql_club="select username from clubowner where clubname='"+clubname+"'";

@@ -38,6 +38,7 @@
                     <li><a href="createclub.jsp">创建社团</a></li>
                     <li><a href="joinclub.jsp">加入社团</a></li>
                     <li><a href="joinactivity.jsp">参加活动</a></li>
+                    <li><a href="myMessage.jsp">我的消息</a></li>
                 </ul>
             </div>
             <div class="content">
@@ -51,6 +52,7 @@
                                 club.getConn();
                                 String sql1="select clubname from clubmember where members='"+username+"'";
                                 rs=club.executeQuery(sql1);
+                                
                                 
                                 if(!rs.next()){
                                     String sql="select clubname from clubowner where username!='"+username+"';";

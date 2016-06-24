@@ -19,9 +19,10 @@
         <link rel="stylesheet" type="text/css" href="css/showclub.css">
     </head>
     <body>
+        <%String username=(String)session.getAttribute("username"); %>
         <div class="header">
             <div class="header-content">
-                <h1>高校社团管理系统</h1><span class="link"><a href="myclub.jsp">返回</a><a href="main.jsp">首页</a><a href="outSystem">退出系统</a></span>
+                <h1>高校社团管理系统</h1><span class="link"><span class="user-link">欢迎你:&nbsp;&nbsp;[<a href="info.jsp"><%=username%></a>]</span><a href="myclub.jsp">返回</a><a href="main.jsp">首页</a><a href="outSystem">退出系统</a></span>
             </div>
         </div>
         <div class="wrap">
@@ -29,27 +30,22 @@
                 <jsp:useBean id="club" scope="application" class="com.ucs.jsp.register"/>
                 <%
                     String clubname=request.getParameter("clubname"); 
-                    String username=(String)session.getAttribute("username");
                     String owner="",school="",introduce="";
                     int members = 1;
                     
                     club.getConn();
-                    ResultSet rs=null,rs_1=null,rs_2=null,rs_1_1=null;
+                    ResultSet rs=null,rs_1=null,rs_1_1=null;
                     try{
-                        String sql="select username from clubowner where clubname='"+clubname+"'";
+                        String sql="select * from clubowner where clubname='"+clubname+"'";
                         rs=club.executeQuery(sql);
                         if(rs.next()){
                             owner=rs.getString("username");
+                            introduce=rs.getString("introduce");
                             String sql1="select school from register where username='"+owner+"'";
                             rs_1=club.executeQuery(sql1);
                             if(rs_1.next()){
                                 school=rs_1.getString("school");
                             }
-                        }
-                        String sql2="select introduce from club where clubname='"+clubname+"'";
-                        rs_2=club.executeQuery(sql2);
-                        if(rs_2.next()){
-                            introduce=rs_2.getString("introduce");
                         }
                         //统计社团成员数量
                         String sql_club="select username from clubowner where clubname='"+clubname+"'";
@@ -105,7 +101,7 @@
                         rs_3=club.executeQuery(sql3);
                         rs_4=club.executeQuery(sql3);
                         if(!rs_3.next()){
-                            out.print("<li><p>该社团到现在为止还没有发布任何公告或消息！</p></li>");
+                            out.print("<ul class='list-group'><li class='list-group-item'><p>该社团到现在为止还没有发布任何公告或消息！</p></li>");
                         }else{
                             while(rs_4.next()){
                     %>
@@ -122,7 +118,7 @@
                 </div>
                 <div class="col-md-5">  <!-- 活动列表 -->
                     <%
-                    ResultSet rs_2_1=null,rs_3_1=null,rs_4_1=null,rs_4_2;
+                    ResultSet rs_2_1=null,rs_3_1=null,rs_4_1=null,rs_4_2=null;
                     try{
                         club.getConn();
                         String sql="select * from clubactivity where clubname='"+clubname+"' order by datetime desc";
@@ -177,6 +173,8 @@
                 <%
                                 }
                             }
+                        }else{
+                            out.print("<ul class='list-group'><li class='list-group-item'>此社团暂时还没有发布活动！</li></ul>");
                         }
 
                     }catch (Exception ex) {

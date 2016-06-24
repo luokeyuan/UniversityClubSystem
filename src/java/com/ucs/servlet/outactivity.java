@@ -40,7 +40,7 @@ public class outactivity extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
             register reg=new register();
-            ResultSet rs=null;
+            ResultSet rs = null,rs_1 = null;
             int a_id=Integer.parseInt(request.getParameter("a_id"));
             String entry=request.getParameter("entry");
             HttpSession session = request.getSession(true);
@@ -55,6 +55,18 @@ public class outactivity extends HttpServlet {
                     request.getRequestDispatcher("showclub.jsp?clubname="+clubname).forward(request, response);
                 }else{
                     request.getRequestDispatcher("joinactivity.jsp").forward(request, response);
+                }
+                
+                String sql_activity = "select * from clubactivity where a_id = "+a_id;
+                rs_1 = reg.executeQuery(sql_activity);
+                if(rs_1.next()){
+                    String sql_owner = "select username from clubowner where clubname = '"+rs_1.getString("clubname")+"'";
+                    rs = reg.executeQuery(sql_owner);
+                    if(rs.next()){
+                        String newMessage = "消息：你的社员："+joinername+",取消参加你的活动--"+rs_1.getString("title")+"!";
+                        String sql_message = "insert into usermessage (username,content) values('"+rs.getString("username")+"','"+newMessage+"')";
+                        reg.insertConn(sql_message);
+                    }
                 }
             } catch (Exception ex) {
                 Logger.getLogger(createclub.class.getName()).log(Level.SEVERE, null, ex);

@@ -36,6 +36,7 @@
                     <li><a href="createclub.jsp">创建社团</a></li>
                     <li><a href="joinclub.jsp">加入社团</a></li>
                     <li><a href="joinactivity.jsp">参加活动</a></li>
+                    <li><a href="myMessage.jsp">我的消息</a></li>
                 </ul>
             </div>
             <div class="content">
@@ -44,7 +45,7 @@
                     <ul class="list-group">
                         <jsp:useBean id="userinfo" scope="application" class="com.ucs.jsp.register"/>
                         <%
-                            ResultSet j_rs=null,j_rs1=null;
+                            ResultSet j_rs=null,j_rs1=null,rs_1=null;
                             try{
                                 userinfo.getConn();
                                 String clubname1="";
@@ -58,7 +59,7 @@
                                         clubname1=j_rs1.getString("clubname");
                         %>
                         <li class="list-group-item" style="position:relative;"><%=clubname1 %>
-                            <a href='deleteclub?clubname=<%=clubname1 %>'><button class='btn btn-xs btn-success' style="position:absolute;right:70px;">退出</button></a>
+                            <a href='outClub?clubname=<%=clubname1 %>'><button class='btn btn-xs btn-success' style="position:absolute;right:70px;">退出</button></a>
                             <a href='showclub.jsp?clubname=<%=clubname1 %>'><button class='btn btn-xs btn-success' style="position:absolute;right:20px;">查看</button></a>
                         </li>
                         <%
@@ -87,11 +88,20 @@
                                 }else{
                                     while(c_rs1.next()){
                                         clubname2=c_rs1.getString("clubname");
+                                        if(Integer.parseInt(c_rs1.getString("state"))==1){
                         %>
                         <li class="list-group-item" style="position:relative;"><%=clubname2 %>
                             <a href='manageclub.jsp?clubname=<%=clubname2 %>'><button class='btn btn-xs btn-success' style="position:absolute;right:20px;">管理</button></a>
                         </li>
+                        <%                    
+                                        }else{
+                        %>
+                        <li class="list-group-item" style="position:relative;"><%=clubname2 %>
+                            <button class='btn btn-xs disabled' style="position:absolute;right:20px;">待审核</button>
+                        </li>
                         <%
+                                            
+                                        }
                                     }
                                 }
                             }catch (Exception ex) {

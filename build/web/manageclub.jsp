@@ -25,10 +25,11 @@
         <jsp:useBean id="club" scope="application" class="com.ucs.jsp.register"/>
         <%
             String clubname=request.getParameter("clubname");
+            String username=(String)session.getAttribute("username");
         %>
         <div class="header">
             <div class="header-content">
-                <h1>高校社团管理系统</h1><span class="link"><a href="myclub.jsp">返回</a><a href="main.jsp">首页</a><a href="outSystem">退出系统</a></span>
+                <h1>高校社团管理系统</h1><span class="link"><span class="user-link">欢迎你:&nbsp;&nbsp;[<a href="info.jsp"><%=username%></a>]</span><a href="myclub.jsp">返回</a><a href="main.jsp">首页</a><a href="outSystem">退出系统</a></span>
             </div>
         </div>
         <div class="wrap">
@@ -72,7 +73,7 @@
                                 <div class="panel-footer" style="position:relative">
                                     <span>发布日期：<%=n_rs1.getString("datetime") %></span>
                                     <a href='deletenotice?n_id=<%=n_rs1.getString("n_id")%>&clubname=<%=clubname%>'>
-                                    <button class="btn btn-success btn-xs" style="position:absolute;right:20px;top:12px;">删除</button>
+                                    <button class="btn btn-danger btn-xs" style="position:absolute;right:20px;top:12px;">删除</button>
                                     </a>
                                 </div>
                             </div>
@@ -132,8 +133,8 @@
                             <a href='showActivity.jsp?a_id=<%=a_rs1.getString("a_id")%>'>
                                 <button class="btn btn-success btn-xs" style="position:absolute;right:76px;top:6px;">查看</button>
                             </a>
-                            <a href='deleteactivity?a_id=<%=a_rs1.getString("a_id")%>&clubname=<%=clubname%>'>
-                                <button class="btn btn-success btn-xs" style="position:absolute;right:20px;top:6px;">删除</button>
+                            <a href='deleteActivity?a_id=<%=a_rs1.getString("a_id")%>&clubname=<%=clubname%>'>
+                                <button class="btn btn-danger btn-xs" style="position:absolute;right:24px;top:6px;">删除</button>
                             </a>
                         </div>
                     </div>
@@ -148,7 +149,6 @@
             </div>
             
             <div class="members sidebar" id="sb3"><!--显示社团成员-->
-                <h2>社团所有成员</h2>
                 <ul class="list-group">
                     <%
                     try{
@@ -161,11 +161,11 @@
                         }else{
                             while(m_rs1.next()){
                     %>
-                    <li class='list-group-item' style="position: relative;"><%=m_rs.getString("members")%>
-                        <a href='deletemember?members=<%=m_rs.getString("members")%>&clubname=<%=clubname%>'>
-                            <button type='button' class='btn btn-success btn-xs' style="position: absolute;right: 20px;">删除</button>
+                    <li class='list-group-item' style="position: relative;"><%=m_rs1.getString("members")%>
+                        <a href='deletemember?members=<%=m_rs1.getString("members")%>&clubname=<%=clubname%>'>
+                            <button type='button' class='btn btn-danger btn-xs' style="position: absolute;right: 20px;">删除</button>
                         </a>
-                        <a href='personinfo.jsp?username=<%=m_rs.getString("members")%>'>
+                        <a href='personinfo.jsp?username=<%=m_rs1.getString("members")%>'>
                             <button type='button' class='btn btn-success btn-xs' style="position: absolute;right: 75px;">信息</button>
                         </a>
                     </li>
@@ -191,7 +191,7 @@
                     String intro="";
                     try{
                         club.getConn();
-                        String sql="select * from club where clubname='"+clubname+"'";
+                        String sql="select * from clubowner where clubname='"+clubname+"'";
                         rs=club.executeQuery(sql);
                         if(rs.next()){
                            intro = rs.getString("introduce");

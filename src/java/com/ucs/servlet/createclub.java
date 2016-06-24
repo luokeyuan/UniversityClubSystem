@@ -51,13 +51,13 @@ public class createclub extends HttpServlet {
                 String sql = "select * from clubowner where clubname = '" + clubname + "'";
                 reg.executeQuery(sql);
                 if(reg.executeQuery(sql).next()){
-                    request.getRequestDispatcher("/createclub.jsp").forward(request, response);
+                    request.getRequestDispatcher("createclub.jsp").forward(request, response);
                 }else{
-                    String sql1 = "insert into clubowner values('"+clubname+"','"+username+"')";
+                    String sql1 = "insert into clubowner (clubname,username,introduce) values('"+clubname+"','"+username+"','"+intro+"')";
                     reg.insertConn(sql1);
-                    String sql2 = "insert into club (clubname,introduce) values('"+clubname+"','"+intro+"')";
-                    reg.insertConn(sql2);
-                    request.getRequestDispatcher("/myclub.jsp").forward(request, response);
+                    out.print("<script>alert(\"你已成功创建社团！\");</script>");
+//                    request.getRequestDispatcher("myclub.jsp").forward(request, response);
+                    response.sendRedirect("myclub.jsp");
                 }
             } catch (Exception ex) {
                 Logger.getLogger(createclub.class.getName()).log(Level.SEVERE, null, ex);

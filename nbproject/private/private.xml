@@ -3,16 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/deletejoiner.java</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/deleteUser.java</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/createclub.jsp</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/changeinfoservlet.java</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/club_notice.jsp</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/css/base.css</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/club_activity.jsp</file>
             <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/showclub.jsp</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/regsucces.jsp</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/outactivity.java</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/showActivity.jsp</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/test.jsp</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/updateactivity.java</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/personinfo.jsp</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/js/base.js</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/manager.jsp</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/createclub.java</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/deleteclub.java</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/web/club.jsp</file>
             <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/deletemember.java</file>
-            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/joinactivity.java</file>
+            <file>file:/F:/NetBeansProjects/UniversityClubSystem/src/java/com/ucs/servlet/deleteclub_admin.java</file>
         </group>
     </open-files>
 </project-private>

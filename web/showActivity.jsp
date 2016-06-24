@@ -19,15 +19,17 @@
         <link rel="stylesheet" type="text/css" href="css/showActivity.css">
     </head>
     <body>
+        <%String user = (String)session.getAttribute("username"); %>
         <div class="header">
             <div class="header-content">
-                <h1>高校社团管理系统</h1><span class="link"><a href="#" id="back">返回</a><a href="main.jsp">首页</a><a href="outSystem">退出系统</a></span>
+                <h1>高校社团管理系统</h1><span class="link"><span class="user-link">欢迎你:&nbsp;&nbsp;[<a href="info.jsp"><%=user%></a>]</span><a href="#" id="back">返回</a><a href="main.jsp">首页</a><a href="outSystem">退出系统</a></span>
             </div>
         </div>
         <div class="wrap">
             <div class="activity">
             <jsp:useBean id="activity" scope="application" class="com.ucs.jsp.register"/>
             <%
+                String username=request.getParameter("username");
                 int a_id=Integer.parseInt(request.getParameter("a_id"));
                 String title="",content="";
                 activity.getConn();
@@ -75,7 +77,7 @@
                     <a href='deletejoiner?a_id=<%=a_id%>&joinername=<%=rs_1.getString("joinername")%>'>
                         <button class="btn btn-success btn-xs" style="position:absolute;right:20px;">删 除</button>
                     </a>
-                    <a href='personinfo.jsp？username=<%=rs_1.getString("joinername")%>'>
+                    <a href='personinfo.jsp?username=<%=rs_1.getString("joinername")%>'>
                         <button type='button' class='btn btn-success btn-xs' style="position: absolute;right: 75px;">信息</button>
                     </a>
                 </li>

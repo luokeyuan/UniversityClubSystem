@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author MR.l
  */
-public class joinactivity extends HttpServlet {
+public class passClub extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,42 +35,28 @@ public class joinactivity extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
+        request.setCharacterEncoding("UTF-8");
         try {
             /* TODO output your page here. You may use following sample code. */
             register reg=new register();
-            ResultSet rs = null,rs_1 = null;
-            int a_id = Integer.parseInt(request.getParameter("a_id"));
-            String entry=request.getParameter("entry");
-            HttpSession session = request.getSession(true);
-            String username=(String)session.getAttribute("username");
+            ResultSet rs=null;
+            String clubname=request.getParameter("clubname");
             try {
-                out.print(a_id+"  "+username);
                 reg.getConn();
-                String sql1 = "insert into activityjoiner (a_id,joinername) values("+a_id+",'"+username+"')";
-                reg.insertConn(sql1);
-                if("showclub".equals(entry)){
-                    String clubname=request.getParameter("clubname");
-                    request.getRequestDispatcher("showclub.jsp?clubname="+clubname).forward(request, response);
-                }else{
-                    request.getRequestDispatcher("joinactivity.jsp").forward(request, response);
+                String sql = "update clubowner set state=1 where clubname='"+clubname+"'";
+                reg.updateConn(sql);
+                String sql_user = "select username from clubowner where clubname = '"+clubname+"'";
+                rs=reg.executeQuery(sql_user);
+                if(rs.next()){
+                    String newMessage = "你创建的社团："+clubname+",已通过管理员的审核，快去管理你的社团吧！";
+                    String sql_message = "insert into usermessage (username,content) values('"+rs.getString("username")+"','"+newMessage+"')";
+                    reg.insertConn(sql_message);
                 }
-                String sql_activity = "select * from clubactivity where a_id = "+a_id;
-                rs_1 = reg.executeQuery(sql_activity);
-                if(rs_1.next()){
-                    String sql_owner = "select username from clubowner where clubname = '"+rs_1.getString("clubname")+"'";
-                    rs = reg.executeQuery(sql_owner);
-                    if(rs.next()){
-                        String newMessage = "消息：你的社员："+username+",参加了你的活动--"+rs_1.getString("title")+"!";
-                        String sql_message = "insert into usermessage (username,content) values('"+rs.getString("username")+"','"+newMessage+"')";
-                        reg.insertConn(sql_message);
-                    }
-                }
+                request.getRequestDispatcher("club.jsp").forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(createclub.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
             reg.dbclose();
         } finally {
             out.close();

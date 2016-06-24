@@ -8,20 +8,18 @@ package com.ucs.servlet;
 import com.ucs.jsp.register;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author MR.l
  */
-public class deleteclub extends HttpServlet {
+public class deleteMessage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,18 +38,12 @@ public class deleteclub extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
             register reg=new register();
-            ResultSet rs=null;
-            String clubname=request.getParameter("clubname");
-            HttpSession session = request.getSession(true);
-            String username=(String)session.getAttribute("username");
-            int a_id = -1;
+            int m_id=Integer.parseInt(request.getParameter("m_id"));
             try {
                 reg.getConn();
-                String sql = "delete from clubmember where members='"+username+"' and clubname='"+clubname+"'";
-                reg.deleteConn(sql);
-                String sql1 = "delete from activityjoiner where a_id in (select a_id from clubactivity where clubname='"+clubname+"') and joinername='"+username+"'";
-                reg.deleteConn(sql1);
-                request.getRequestDispatcher("myclub.jsp").forward(request, response);
+                String sql = "delete from usermessage where m_id="+m_id;
+                reg.updateConn(sql);
+                request.getRequestDispatcher("myMessage.jsp").forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(createclub.class.getName()).log(Level.SEVERE, null, ex);
             }

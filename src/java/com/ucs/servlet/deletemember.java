@@ -40,14 +40,21 @@ public class deletemember extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
             register reg=new register();
-            ResultSet rs=null;
+            ResultSet rs=null,rs_1=null;
             String members=request.getParameter("members");
             String clubname=request.getParameter("clubname");
+            HttpSession session = request.getSession(true);
+            String username=(String)session.getAttribute("username");
             
             try {
                 reg.getConn();
                 String sql = "delete from clubmember where members='"+members+"' and clubname='"+clubname+"'";
                 reg.deleteConn(sql);
+                
+                String newMessage = "消息：你被"+username+"赶出了("+clubname+")社团!";
+                String sql_message = "insert into usermessage (username,content) values('"+members+"','"+newMessage+"')";
+                reg.insertConn(sql_message);
+                
                 request.getRequestDispatcher("manageclub.jsp?=clubname"+clubname).forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(createclub.class.getName()).log(Level.SEVERE, null, ex);

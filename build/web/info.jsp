@@ -40,9 +40,10 @@
             </div>
         </div>
         <jsp:useBean id="userinfo" scope="application" class="com.ucs.jsp.register"/>
+        
         <%
             String name="",sex="",school="",phone="",email="",intro="";
-            ResultSet rs=null;
+            ResultSet rs=null,rs_1=null;
             try{
                 userinfo.getConn();
                 String sql="select * from register where username='"+username+"'";
@@ -55,6 +56,7 @@
                     email=rs.getString("email");
                     intro=rs.getString("introduce");
                 }
+                userinfo.dbclose();
             }catch (Exception ex) {
                 Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -68,6 +70,7 @@
                     <li><a href="createclub.jsp">创建社团</a></li>
                     <li><a href="joinclub.jsp">加入社团</a></li>
                     <li><a href="joinactivity.jsp">参加活动</a></li>
+                    <li><a href="myMessage.jsp">我的消息<span class="badge" id="badge"></a></li>
                 </ul>
             </div>
             <div class="content" id="info">
@@ -131,6 +134,7 @@
         </div>
                     
         <script>
+        window.onload=function(){
             var fixinfo = document.getElementById("fixinfo");
             var submit = document.getElementById("submit");
             var cancel = document.getElementById("cancel");
@@ -153,6 +157,7 @@
                     showinfo();
                 }
             }
+        }    
         </script>
     </body>
 </html>

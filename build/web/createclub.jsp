@@ -4,6 +4,10 @@
     Author     : MR.l
 --%>
 
+<%@page import="com.ucs.jsp.register"%>
+<%@page import="java.util.logging.Logger"%>
+<%@page import="java.util.logging.Level"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -32,6 +36,7 @@
                     <li><a href="createclub.jsp">创建社团</a></li>
                     <li><a href="joinclub.jsp">加入社团</a></li>
                     <li><a href="joinactivity.jsp">参加活动</a></li>
+                    <li><a href="myMessage.jsp">我的消息<span class="badge" id="badge"></span></a></li>
                 </ul>
             </div>
             <div class="content">
@@ -49,12 +54,13 @@
                                 <textarea name="introduce" id="introduce" class="form-control" rows="5"></textarea>
                             </div>
                         </div>
-                        <button type="submit" id="submit" class="btn btn-success">确认创建</button>
+                        <button type="submit" id="submit" class="btn btn-success">提交申请</button>
                     </form>
                 </div>
             </div>
         </div>
         <script>
+        window.onload=function(){
             var submit = document.getElementById("submit");
             var clubname = document.getElementById("clubname");
             var intro = document.getElementById("introduce");
@@ -93,7 +99,7 @@
                     }
 		}
             }
-            
+        } 
         </script>
     </body>
 </html>

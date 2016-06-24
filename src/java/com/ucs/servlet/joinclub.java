@@ -40,6 +40,7 @@ public class joinclub extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
             register reg=new register();
+            ResultSet rs = null;
             String clubname=request.getParameter("clubname");
             HttpSession session = request.getSession(true);
             String username=(String)session.getAttribute("username");
@@ -47,6 +48,13 @@ public class joinclub extends HttpServlet {
                 reg.getConn();
                 String sql1 = "insert into clubmember (members,clubname) values('"+username+"','"+clubname+"')";
                 reg.insertConn(sql1);
+                String sql_owner = "select username from clubowner where clubname='"+clubname+"'";
+                rs = reg.executeQuery(sql_owner);
+                if(rs.next()){
+                    String newMessage = "用户："+username+",加入了你的社团--"+clubname+"!";
+                    String sql_message = "insert into usermessage (username,content) values('"+rs.getString("username")+"','"+newMessage+"')";
+                    reg.insertConn(sql_message);
+                }
                 request.getRequestDispatcher("joinclub.jsp").forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(createclub.class.getName()).log(Level.SEVERE, null, ex);

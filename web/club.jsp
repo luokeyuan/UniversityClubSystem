@@ -48,7 +48,7 @@
                             <li><a href="club.jsp">社团管理</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">退出系统</a></li>
+                            <li><a href="index.jsp">退出系统</a></li>
                         </ul>
                     </div>
                 </div>
@@ -63,6 +63,7 @@
                         <th>社团名称</th>
                         <th>创建者</th>
                         <th>简介</th>
+                        <th>审核情况</th>
                         <th>社员人数</th>
                         <th>发布公告数</th>
                         <th>发布活动数</th>
@@ -71,18 +72,13 @@
                     <jsp:useBean id="user" scope="application" class="com.ucs.jsp.register"/>
                     <%
                         user.getConn();
-                        ResultSet rs=null,rs_intro=null,rs_mem=null,rs_notice=null,rs_activity=null;
+                        ResultSet rs=null,rs_mem=null,rs_notice=null,rs_activity=null;
                         try{
                             String sql = "select * from clubowner";
                             rs=user.executeQuery(sql);
                             while(rs.next()){
                                 int member = 0, notice = 0, activity = 0;
-                                String introduce="";
-                                String sql_intro = "select * from club where clubname = '"+rs.getString("clubname")+"'";
-                                rs_intro=user.executeQuery(sql_intro);
-                                if(rs_intro.next()){
-                                    introduce = rs_intro.getString("introduce");
-                                }
+                                String state = "";
                                 
                                 String sql_mem = "select * from clubmember where clubname = '"+rs.getString("clubname")+"'";
                                 rs_mem=user.executeQuery(sql_mem);
@@ -99,19 +95,41 @@
                                 while(rs_activity.next()){
                                     activity++;
                                 }
+                                
+                                if(Integer.parseInt(rs.getString("state"))==1){  //查看审核情况
+                                    state = "通过";
+                                    
                     %>
                     <tr>
                         <td><%=rs.getString("clubname")%></td>
                         <td><%=rs.getString("username")%></td>
-                        <td><%=introduce%></td>
+                        <td><%=rs.getString("introduce")%></td>
+                        <td><%=state%></td>
                         <td><%=member%></td>
                         <td><a href='club_notice.jsp?clubname=<%=rs.getString("clubname")%>'><%=notice%></a></td>
                         <td><a href='club_activity.jsp?clubname=<%=rs.getString("clubname")%>'><%=activity%></a></td>
                         <td><a href="deleteclub_admin?clubname=<%=rs.getString("clubname")%>"><button class="btn btn-danger btn-xs">删除</button></a></td>
                     </tr>
                     <%
+                                }else{
+                                    state = "待审核";
+                    %>
+                    <tr>
+                        <td><%=rs.getString("clubname")%></td>
+                        <td><%=rs.getString("username")%></td>
+                        <td><%=rs.getString("introduce")%></td>
+                        <td><%=state%></td>
+                        <td><%=member%></td>
+                        <td><a href='club_notice.jsp?clubname=<%=rs.getString("clubname")%>'><%=notice%></a></td>
+                        <td><a href='club_activity.jsp?clubname=<%=rs.getString("clubname")%>'><%=activity%></a></td>
+                        <td>
+                            <a href="passClub?clubname=<%=rs.getString("clubname")%>"><button class="btn btn-success btn-xs">通过</button></a>
+                            <a href="nopassClub?clubname=<%=rs.getString("clubname")%>"><button class="btn btn-danger btn-xs">不通过</button></a>
+                        </td>
+                    </tr>
+                    <%
+                                }
                             }
-
                         }catch (Exception ex) {
                             Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
                         }

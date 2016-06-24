@@ -40,7 +40,6 @@ public class deletenotice extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
             register reg=new register();
-            ResultSet rs=null;
             int n_id=Integer.parseInt(request.getParameter("n_id"));
             String clubname=request.getParameter("clubname");
             try {
